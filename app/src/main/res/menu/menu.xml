@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ic_generate_sounds"
+        android:title="Prepare"
+        android:icon="@drawable/create_icon"
+        />
+    <item
+        android:id="@+id/ic_latest_generated"
+        android:title="Lyrics"
+        android:icon="@drawable/onion"
+        />
+    <item
+        android:id="@+id/ic_saved_sounds"
+        android:title="Saved"
+        android:icon="@drawable/save_icon"
+        />
+    <item
+        android:id="@+id/ic_about_page"
+        android:title="About"
+        android:icon="@drawable/info_icon"
+        />
+</menu>

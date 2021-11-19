@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/weightAssignmentFragment">
+    <fragment
+        android:id="@+id/weightAssignmentFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.album_weights.WeightAssignmentFragment"
+        android:label="WeightAssignmentFragment">
+        <action
+            android:id="@+id/action_weightAssignmentFragment_to_lyricDisplayFragment"
+            app:destination="@id/lyricDisplayFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_weightAssignmentFragment_to_savedSongsFragment"
+            app:destination="@id/savedSongsFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_weightAssignmentFragment_to_aboutPageFragment"
+            app:destination="@id/aboutPageFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/lyricDisplayFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.LyricDisplayFragment"
+        android:label="LyricDisplayFragment">
+        <argument
+            android:name="lyrics"
+            android:defaultValue="0"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_lyricDisplayFragment_to_newSavedSongDialogFragment"
+            app:destination="@id/newSavedSongDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedSongsFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsFragment"
+        android:label="SavedSongsFragment"/>
+    <fragment
+        android:id="@+id/aboutPageFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.about_page.AboutPageFragment"
+        android:label="AboutPageFragment" />
+    <fragment
+        android:id="@+id/newSavedSongDialogFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.newSavedSongDialogFragment"
+        android:label="newSavedSongDialogFragment" >
+        <action
+            android:id="@+id/action_newSavedSongDialogFragment_to_savedSongsFragment"
+            app:destination="@id/savedSongsFragment" />
+    </fragment>
+
+</navigation>

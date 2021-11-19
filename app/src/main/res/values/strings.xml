@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SmashMouthSongGenerator</string>
+    <string name="select_your_weights">Select your weights!</string>
+    <string name="the_lyrics_will_better_resemble_albums_or_songs_with_more_weight">(The lyrics will better resemble albums or songs with more weight)</string>
+    <string name="generate">Generate lyrics</string>
+    <string name="album_title_goes_here">album title goes here</string>
+    <string name="yyyy">(YYYY)</string>
+    <string name="album_weight_placeholder">Album weight: 1/5</string>
+    <string name="album_weight_xxx">Album weight: %1$s/5</string>
+    <string name="placeholder_lyrics">(Verse)\nYou\'re a frying pan la rio chinatown if\nyou realize i\'m just in tryin\'\nall the time i know your\n(Chorus)\nWoman i\'m doing what i hit the\nsun catches up the way she knows that\nshe will always get started and i can\nwith a room with\na believer i wanted sunshine i want\nsomeone anyone and they don\'t you\n(Verse)\nTripped and zen and we\'re kept\ndown but you\'re a trace of you\nthe tiger by the morning comes to find\n(Chorus)\nWoman i\'m doing what i hit the\nsun catches up the way she knows that\nshe will always get started and i can\nwith a room with\na believer i wanted sunshine i want\nsomeone anyone and they don\'t you</string>
+    <string name="generate_again">Generate Again</string>
+    <string name="save_locally">Save Locally</string>
+    <string name="share">Share</string>
+    <string name="your_very_own_generated_smash_mouth_song">Your very own generated Smash Mouth song:</string>
+    <string name="generating_your_lyrics">Generating your lyrics…</string>
+    <string name="save_your_song">Save your song!</string>
+    <string name="give_your_song_a_title">Give your song a title</string>
+    <string name="cancel">Nope!</string>
+    <string name="save_it">Save it!</string>
+</resources>
