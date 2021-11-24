@@ -25,7 +25,7 @@ class AlbumGridAdapter(
         holder.image.setImageResource(albumGrid.albumImage!!)
         holder.year.text = getItem(position).albumYear
         holder.title.text = getItem(position).albumName
-        holder.weightBar.progress = getItem(position).albumWeight!!
+        holder.weightBar.progress = getItem(position).albumWeight!!.toInt()
         holder.weightText.text = "Album weight: ${getItem(position).albumWeight}/5"
 
     }

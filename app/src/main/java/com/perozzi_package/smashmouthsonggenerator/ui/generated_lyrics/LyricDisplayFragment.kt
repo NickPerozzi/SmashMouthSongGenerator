@@ -4,26 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.recyclerview.widget.RecyclerView
-import com.perozzi_package.smashmouthsonggenerator.LyricAdapter
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentLyricDisplayBinding
 
 class LyricDisplayFragment : Fragment() {
 
-    private lateinit var navController: NavController
-    lateinit var binding: FragmentLyricDisplayBinding
     private lateinit var ldViewModel: LyricDisplayViewModel
-    private lateinit var lyricListAdapter: LyricAdapter
-
+    private lateinit var navController: NavController
+    private lateinit var binding: FragmentLyricDisplayBinding
+    private val args: LyricDisplayFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLyricDisplayBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         return binding.root
@@ -31,25 +30,27 @@ class LyricDisplayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container_view) as NavHostFragment
-        navController = navHostFragment.navController*/
-        //
-        // navController = Navigation.findNavController(view)
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         ldViewModel = LyricDisplayViewModel(requireActivity().application)
+        navController = Navigation.findNavController(view)
 
+        val customTitle = binding.songTitleEditText
         val lyricView = binding.lyricDisplayTextView
-        ldViewModel.lyrics.observe(viewLifecycleOwner, {
-            lyricView.text = it
-        })
+        val latestLyrics = args.myPassedLyricsInFragment
+        lyricView.text = latestLyrics
 
-//        val recyclerView: RecyclerView = binding.lyricDisplayRecyclerView
-//        recyclerView.layoutManager = ldViewModel.lyricGridLayoutManager
-//        recyclerView.setHasFixedSize(true)
+        val saveLocallyButton = binding.saveLocallyButton
+        saveLocallyButton.setOnClickListener {
+            val songTitle = customTitle.text.toString()
+            if (songTitle.isEmpty()) {
+                Toast.makeText(
+                    context, "Please give your song a name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val action = LyricDisplayFragmentDirections
+                .actionLyricDisplayFragmentToSavedSongsFragment(latestLyrics, songTitle, true)
+            navController.navigate(action)
+        }
 
-//        lyricListAdapter = LyricAdapter()
-//        recyclerView.adapter = lyricListAdapter
-//        lyricListAdapter.submitList(ldViewModel.putLyricsIntoList())
-
+        binding.generateAgainButton.setOnClickListener { navController.popBackStack() }
     }
 }

@@ -12,6 +12,7 @@ import com.perozzi_package.smashmouthsonggenerator.Lyrics
 class LyricDisplayViewModel(application: Application) : AndroidViewModel(application) {
 
     var lyrics: MutableLiveData<String> = MutableLiveData("Your generated lyrics will go here!")
+    // var lyrics: String = "Your generated lyrics will go here!"
 
 /*
     fun putLyricsIntoList(): MutableList<Lyrics> {

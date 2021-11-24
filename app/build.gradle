@@ -2,13 +2,15 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id "androidx.navigation.safeargs.kotlin"
+    id 'kotlin-parcelize'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.smashmouthsonggenerator"
+        applicationId "com.perozzi_package.smashmouthsonggenerator"
         minSdk 21
         targetSdk 31
         versionCode 1

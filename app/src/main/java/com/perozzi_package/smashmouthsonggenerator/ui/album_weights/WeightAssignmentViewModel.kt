@@ -1,21 +1,20 @@
 package com.perozzi_package.smashmouthsonggenerator.ui.album_weights
 
 import android.app.Application
-import android.content.res.Resources
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.perozzi_package.smashmouthsonggenerator.AlbumGrid
+import com.perozzi_package.smashmouthsonggenerator.AlbumGridAdapter
 import com.perozzi_package.smashmouthsonggenerator.R
 import java.util.*
 
 class WeightAssignmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    var weightGridLayoutManager: GridLayoutManager? =
-        GridLayoutManager(application, 3, LinearLayoutManager.VERTICAL, false)
+    private var weightGridLayoutManager: GridLayoutManager? = GridLayoutManager(application, 3, LinearLayoutManager.VERTICAL, false)
 
-    private val smashMouthDictionary : MutableMap<String,Map<String,Any>> = mutableMapOf(
+    private val smashMouthDictionary: MutableMap<String, Map<String, Any>> = mutableMapOf(
         Pair(
             "fush_yu_mang", mapOf(
                 Pair("name", "Fush Yu Mang"),
@@ -74,18 +73,21 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
             )
         )
     )
-    private fun oneWeights(map: MutableMap<String, Map<String, Any>>): MutableList<Int> {
-        val _list = mutableListOf<Int>()
+
+    @Suppress("ReplaceManualRangeWithIndicesCalls")
+    private fun oneWeights(map: MutableMap<String, Map<String, Any>>): MutableList<String> {
+        val stringList = mutableListOf<String>()
         for (index in 0 until map.size)
-            _list.add(1)
-        return _list
+            stringList.add("1")
+        return stringList
     }
 
     var albumWeights = oneWeights(smashMouthDictionary)
-    val yearsList = mutableListOf<String>()
-    val titlesList = mutableListOf<String>()
-    val imageAddressList = mutableListOf<Int>()
-    var arrayForAlbumGrid: ArrayList<AlbumGrid> = arrayListOf()
+
+    private val yearsList = mutableListOf<String>()
+    private val titlesList = mutableListOf<String>()
+    private val imageAddressList = mutableListOf<Int>()
+    private var arrayForAlbumGrid: ArrayList<AlbumGrid> = arrayListOf()
     fun prepareDataForAdapter() {
         for (album in smashMouthDictionary.keys) {
             yearsList.add(smashMouthDictionary[album]!!["year"] as String)
@@ -104,7 +106,35 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
+    fun prepareAlbumRecyclerView(
+        thisInterface: AlbumGridAdapter.OnSeekBarChangeListenerInterface,
+        recyclerView: RecyclerView
+    ) {
+        recyclerView.layoutManager = weightGridLayoutManager
+        recyclerView.setHasFixedSize(true)
+        val adapter = AlbumGridAdapter(thisInterface)
+        recyclerView.adapter = adapter
+        adapter.submitList(arrayForAlbumGrid)
+    }
+}
+
 /*
+
+    fun getCurrentWeights(): MutableList<String> {
+        val stringList = mutableListOf<String>()
+        for (weight in albumWeights) {
+            stringList.add(weight.toString())
+        }
+        return stringList
+    }
+
+    suspend fun getTheLyrics(weights: MutableList<String>) {
+        RetrofitInstance.api.getLyrics(
+            weights[0], weights[1], weights[2], weights[3],
+            weights[4], weights[5], weights[6], weights[7]
+        )
+    }
+
     inner class smashMouthAlbum(val name: String, val year: String, val imageAddress: Int)
     val fush_yu_mang: smashMouthAlbum = smashMouthAlbum("Fush Yu Mang", "1997", R.drawable.alb_1_fush_yu_mang_97)
     val astro_lounge = smashMouthAlbum("Astro Lounge", "1999", R.drawable.alb_2_astro_lounge_99)
@@ -115,5 +145,3 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
     val summer_girl = smashMouthAlbum("Summer Girl", "2006", R.drawable.alb_7_summer_girl_06)
     val magic = smashMouthAlbum("Magic", "2012", R.drawable.alb_8_magic_12)
 */
-
-}

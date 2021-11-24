@@ -8,7 +8,7 @@
     <string name="album_weight_placeholder">Album weight: 1/5</string>
     <string name="album_weight_xxx">Album weight: %1$s/5</string>
     <string name="placeholder_lyrics">(Verse)\nYou\'re a frying pan la rio chinatown if\nyou realize i\'m just in tryin\'\nall the time i know your\n(Chorus)\nWoman i\'m doing what i hit the\nsun catches up the way she knows that\nshe will always get started and i can\nwith a room with\na believer i wanted sunshine i want\nsomeone anyone and they don\'t you\n(Verse)\nTripped and zen and we\'re kept\ndown but you\'re a trace of you\nthe tiger by the morning comes to find\n(Chorus)\nWoman i\'m doing what i hit the\nsun catches up the way she knows that\nshe will always get started and i can\nwith a room with\na believer i wanted sunshine i want\nsomeone anyone and they don\'t you</string>
-    <string name="generate_again">Generate Again</string>
+    <string name="generate_again">Again!</string>
     <string name="save_locally">Save Locally</string>
     <string name="share">Share</string>
     <string name="your_very_own_generated_smash_mouth_song">Your very own generated Smash Mouth song:</string>
@@ -17,4 +17,17 @@
     <string name="give_your_song_a_title">Give your song a title</string>
     <string name="cancel">Nope!</string>
     <string name="save_it">Save it!</string>
+    <string name="your_masterpieces">Your Smashterpieces:</string>
+    <string name="song_title_placeholder">song title placeholder</string>
+    <string name="song_lyrics_placeholder">song lyrics placeholder</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_the_app_works">How the app works</string>
+    <string name="about_me">I made this app to strengthen my Android knowledge in pursuit of an internship and/or job. If you have any questions or concerns, feel free to reach out to me at perozzi.n@gmail.com. Thanks for your time, and I hope you enjoy the app!</string>
+    <string name="about_me_title">About the app</string>
+    <string name="copyright">Copyright</string>
+    <string name="copyright_text">I don\'t own the rights to any Smash Mouth music please do not sue me I am not making any money from this app I promise</string>
+    <string name="sue">Sue anyway</string>
+    <string name="how_it_works">Each time the Generate Lyrics button is pressed, world-famous rock band Smash Mouth is notified and writes a completely personalized song in seconds based on which albums of theirs you prefer.</string>
+    <string name="version_1_0">Version 1.0</string>
+    <string name="delete">Delete</string>
 </resources>

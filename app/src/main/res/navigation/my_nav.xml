@@ -35,28 +35,56 @@
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.LyricDisplayFragment"
         android:label="LyricDisplayFragment">
         <argument
-            android:name="lyrics"
-            android:defaultValue="0"
+            android:name="myPassedLyricsInFragment"
+            android:defaultValue="generated lyrics default value"
             app:argType="string" />
         <action
-            android:id="@+id/action_lyricDisplayFragment_to_newSavedSongDialogFragment"
-            app:destination="@id/newSavedSongDialogFragment" />
+            android:id="@+id/action_lyricDisplayFragment_to_savedSongsFragment"
+            app:destination="@id/savedSongsFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
     <fragment
         android:id="@+id/savedSongsFragment"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsFragment"
-        android:label="SavedSongsFragment"/>
+        android:label="SavedSongsFragment">
+        <argument
+            android:name="lyricsToSave"
+            android:defaultValue="lyrics lyrics yeah"
+            app:argType="string" />
+        <argument
+            android:name="songTitleToSave"
+            android:defaultValue="song title yeah"
+            app:argType="string" />
+        <argument
+            android:name="isThisANewSong"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_savedSongsFragment_to_selectedSavedSongFragment"
+            app:destination="@id/selectedSavedSongFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutPageFragment"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.about_page.AboutPageFragment"
         android:label="AboutPageFragment" />
     <fragment
-        android:id="@+id/newSavedSongDialogFragment"
-        android:name="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.newSavedSongDialogFragment"
-        android:label="newSavedSongDialogFragment" >
-        <action
-            android:id="@+id/action_newSavedSongDialogFragment_to_savedSongsFragment"
-            app:destination="@id/savedSongsFragment" />
+        android:id="@+id/selectedSavedSongFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.SelectedSavedSongFragment"
+        android:label="fragment_selected_saved_song"
+        tools:layout="@layout/fragment_selected_saved_song">
+        <argument
+            android:name="savedItemLyrics"
+            android:defaultValue="your special lyrics"
+            app:argType="string" />
+        <argument
+            android:name="savedItemTitle"
+            android:defaultValue="your special title"
+            app:argType="string" />
+        <argument
+            android:name="savedItemObject"
+            app:argType="com.perozzi_package.smashmouthsonggenerator.data.SavedSong" />
     </fragment>
-
 </navigation>
