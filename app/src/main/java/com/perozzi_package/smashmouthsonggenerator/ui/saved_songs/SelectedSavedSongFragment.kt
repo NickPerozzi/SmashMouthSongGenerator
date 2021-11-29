@@ -1,4 +1,4 @@
-package com.perozzi_package.smashmouthsonggenerator
+package com.perozzi_package.smashmouthsonggenerator.ui.saved_songs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentSelectedSavedSongBinding
-import com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsViewModel
 
 class SelectedSavedSongFragment : Fragment() {
 
@@ -33,7 +32,7 @@ class SelectedSavedSongFragment : Fragment() {
         navController = Navigation.findNavController(view)
         ssViewModel = SavedSongsViewModel(requireActivity().application)
 
-        binding.selectedSongLyrics.text = args.savedItemLyrics
+        binding.selectedSongLyrics.setText(args.savedItemLyrics)
         binding.selectedSongTitle.text = args.savedItemTitle
 
         // binding.deleteButton.setOnClickListener { deleteUser() }

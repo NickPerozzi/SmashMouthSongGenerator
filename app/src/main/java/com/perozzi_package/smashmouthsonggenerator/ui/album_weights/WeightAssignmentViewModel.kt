@@ -5,8 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.perozzi_package.smashmouthsonggenerator.AlbumGrid
-import com.perozzi_package.smashmouthsonggenerator.AlbumGridAdapter
+import com.perozzi_package.smashmouthsonggenerator.adapters.AlbumGridAdapter
 import com.perozzi_package.smashmouthsonggenerator.R
 import java.util.*
 

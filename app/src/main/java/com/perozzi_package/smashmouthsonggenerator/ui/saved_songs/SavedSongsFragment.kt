@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.perozzi_package.smashmouthsonggenerator.SavedSongAdapter
+import com.perozzi_package.smashmouthsonggenerator.adapters.SavedSongAdapter
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentSavedSongsBinding
 
@@ -36,7 +36,9 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
         val savedTitle = args.songTitleToSave
         savedSong = SavedSong(0, savedTitle, savedLyrics)
 
-        insertDataToDatabase()
+        if(args.isThisANewSong) {
+            insertDataToDatabase()
+        }
         val ssAdapter = SavedSongAdapter(this as SavedSongAdapter.OnClickDeleteInterface)
         ssViewModel.prepareSavedSongsRecyclerView(this,binding.savedSongsRecyclerView)
         binding.savedSongsRecyclerView.adapter = ssAdapter
@@ -59,7 +61,7 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
                 "\"${savedSong.songTitle}\" was deleted",
                 Toast.LENGTH_SHORT).show()
         }
-        builder.setNegativeButton("Keep it!") { _, _ ->
+        builder.setNegativeButton("Nah") { _, _ ->
             Toast.makeText(
                 requireContext(),
                 "Heck yeah",

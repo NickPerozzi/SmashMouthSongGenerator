@@ -3,12 +3,11 @@ package com.perozzi_package.smashmouthsonggenerator.ui.saved_songs
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.perozzi_package.smashmouthsonggenerator.SavedSongAdapter
+import com.perozzi_package.smashmouthsonggenerator.adapters.SavedSongAdapter
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSongDatabase
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSongRepository

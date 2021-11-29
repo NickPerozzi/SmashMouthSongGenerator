@@ -1,4 +1,4 @@
-package com.perozzi_package.smashmouthsonggenerator
+package com.perozzi_package.smashmouthsonggenerator.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsFragmentDirections
 
@@ -16,14 +17,13 @@ class SavedSongAdapter(
     private val listener: OnClickDeleteInterface
 ) : ListAdapter<SavedSong, SavedSongAdapter.ItemHolder>(SavedSongDiffUtil()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedSongAdapter.ItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val itemHolder = LayoutInflater.from(parent.context)
             .inflate(R.layout.saved_song_item_layout,parent,false)
         return ItemHolder(itemHolder)
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        var savedSongInPosition = getItem(position)
         holder.title.text = getItem(position).songTitle
         holder.lyrics.text = getItem(position).songLyrics
 
@@ -43,7 +43,7 @@ class SavedSongAdapter(
     View.OnClickListener {
         var title: TextView = itemView.findViewById(R.id.songTitle)
         var lyrics: TextView = itemView.findViewById(R.id.songLyrics)
-        var deleteButton: ImageButton = itemView.findViewById(R.id.deleteButton)
+        private var deleteButton: ImageButton = itemView.findViewById(R.id.deleteButton)
 
         init {
             deleteButton.setOnClickListener(this)
@@ -54,7 +54,6 @@ class SavedSongAdapter(
             if (position != RecyclerView.NO_POSITION) {
                 listener.onClickDelete(getItem(position))
             }
-
         }
     }
 

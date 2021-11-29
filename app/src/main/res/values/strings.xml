@@ -30,4 +30,6 @@
     <string name="how_it_works">Each time the Generate Lyrics button is pressed, world-famous rock band Smash Mouth is notified and writes a completely personalized song in seconds based on which albums of theirs you prefer.</string>
     <string name="version_1_0">Version 1.0</string>
     <string name="delete">Delete</string>
+    <string name="fine_tune">Feel free to fine tune the lyrics to your liking!</string>
+    <string name="update_lyrics">Update lyrics</string>
 </resources>

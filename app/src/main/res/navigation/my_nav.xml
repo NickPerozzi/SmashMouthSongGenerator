@@ -3,51 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/weightAssignmentFragment">
+    app:startDestination="@id/ic_generate_sounds">
     <fragment
-        android:id="@+id/weightAssignmentFragment"
+        android:id="@+id/ic_generate_sounds"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.album_weights.WeightAssignmentFragment"
         android:label="WeightAssignmentFragment">
         <action
             android:id="@+id/action_weightAssignmentFragment_to_lyricDisplayFragment"
-            app:destination="@id/lyricDisplayFragment"
+            app:destination="@id/ic_latest_generated"
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
             app:popExitAnim="@anim/slide_out_to_right" />
         <action
             android:id="@+id/action_weightAssignmentFragment_to_savedSongsFragment"
-            app:destination="@id/savedSongsFragment"
+            app:destination="@id/ic_saved_sounds"
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
             app:popExitAnim="@anim/slide_out_to_right" />
         <action
             android:id="@+id/action_weightAssignmentFragment_to_aboutPageFragment"
-            app:destination="@id/aboutPageFragment"
+            app:destination="@id/ic_about_page"
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
             app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
     <fragment
-        android:id="@+id/lyricDisplayFragment"
+        android:id="@+id/ic_latest_generated"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.LyricDisplayFragment"
         android:label="LyricDisplayFragment">
         <argument
             android:name="myPassedLyricsInFragment"
-            android:defaultValue="generated lyrics default value"
+            android:defaultValue="Your generated lyrics will go here!"
             app:argType="string" />
         <action
             android:id="@+id/action_lyricDisplayFragment_to_savedSongsFragment"
-            app:destination="@id/savedSongsFragment"
+            app:destination="@id/ic_saved_sounds"
             app:enterAnim="@anim/slide_in_from_right"
             app:exitAnim="@anim/slide_out_to_left"
             app:popEnterAnim="@anim/slide_in_from_left"
             app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
     <fragment
-        android:id="@+id/savedSongsFragment"
+        android:id="@+id/ic_saved_sounds"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsFragment"
         android:label="SavedSongsFragment">
         <argument
@@ -67,12 +67,12 @@
             app:destination="@id/selectedSavedSongFragment" />
     </fragment>
     <fragment
-        android:id="@+id/aboutPageFragment"
+        android:id="@+id/ic_about_page"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.about_page.AboutPageFragment"
         android:label="AboutPageFragment" />
     <fragment
         android:id="@+id/selectedSavedSongFragment"
-        android:name="com.perozzi_package.smashmouthsonggenerator.SelectedSavedSongFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SelectedSavedSongFragment"
         android:label="fragment_selected_saved_song"
         tools:layout="@layout/fragment_selected_saved_song">
         <argument
