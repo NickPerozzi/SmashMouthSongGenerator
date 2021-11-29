@@ -30,7 +30,7 @@ class AboutPageFragment : Fragment() {
         apViewModel = AboutPageViewModel(requireActivity().application)
 
         binding.sueMeButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0")))
         }
     }
 

@@ -1,4 +1,4 @@
-package com.perozzi_package.smashmouthsonggenerator
+package com.perozzi_package.smashmouthsonggenerator.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

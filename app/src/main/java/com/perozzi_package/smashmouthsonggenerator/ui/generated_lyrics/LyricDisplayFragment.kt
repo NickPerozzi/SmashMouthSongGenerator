@@ -46,6 +46,11 @@ class LyricDisplayFragment : Fragment() {
                     context, "Please give your song a name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (latestLyrics == "Your generated lyrics will go here!") {
+                Toast.makeText(
+                    context, "You have to generate a song first!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val action = LyricDisplayFragmentDirections
                 .actionLyricDisplayFragmentToSavedSongsFragment(latestLyrics, songTitle, true)
             navController.navigate(action)

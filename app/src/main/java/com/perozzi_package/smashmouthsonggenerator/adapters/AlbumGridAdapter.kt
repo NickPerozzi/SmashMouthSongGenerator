@@ -1,5 +1,6 @@
-package com.perozzi_package.smashmouthsonggenerator
+package com.perozzi_package.smashmouthsonggenerator.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,17 +10,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.perozzi_package.smashmouthsonggenerator.ui.album_weights.AlbumGrid
+import com.perozzi_package.smashmouthsonggenerator.R
 
 class AlbumGridAdapter(
     private val listener: OnSeekBarChangeListenerInterface
 ) :
     ListAdapter<AlbumGrid, AlbumGridAdapter.ItemHolder>(AlbumGridDiffUtil()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumGridAdapter.ItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val itemHolder = LayoutInflater.from(parent.context)
             .inflate(R.layout.album_item_layout,parent,false)
         return ItemHolder(itemHolder)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val albumGrid : AlbumGrid = getItem(position)
         holder.image.setImageResource(albumGrid.albumImage!!)

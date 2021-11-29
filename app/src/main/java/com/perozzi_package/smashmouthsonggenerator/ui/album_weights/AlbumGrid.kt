@@ -1,4 +1,4 @@
-package com.perozzi_package.smashmouthsonggenerator
+package com.perozzi_package.smashmouthsonggenerator.ui.album_weights
 
 data class AlbumGrid(
     var albumName: String?,

@@ -1,13 +1,10 @@
 package com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics
 
 import android.app.Application
-import android.content.res.Resources
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.perozzi_package.smashmouthsonggenerator.Lyrics
 
 class LyricDisplayViewModel(application: Application) : AndroidViewModel(application) {
 

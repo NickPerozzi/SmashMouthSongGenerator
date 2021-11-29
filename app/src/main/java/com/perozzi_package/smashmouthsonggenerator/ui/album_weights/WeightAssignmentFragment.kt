@@ -13,6 +13,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.perozzi_package.smashmouthsonggenerator.*
+import com.perozzi_package.smashmouthsonggenerator.adapters.AlbumGridAdapter
+import com.perozzi_package.smashmouthsonggenerator.api.RetrofitInstance
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentWeightAssignmentBinding
 import retrofit2.HttpException
 import java.io.IOException
