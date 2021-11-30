@@ -87,9 +87,16 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
                 }
                 if (response.isSuccessful && response.body() != null) {
                     save("recently generated lyrics", response.body()!!.lyrics)
-                    navController.navigate(
-                        R.id.action_weightAssignmentFragment_to_lyricDisplayFragment
-                    )
+                    try {
+                        navController.navigate(
+                            R.id.action_weightAssignmentFragment_to_lyricDisplayFragment
+                        )
+                    } catch (e:IllegalArgumentException) {
+                        Toast.makeText(
+                            context, resources.getString(R.string.your_lyrics_are_ready),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else {
                     Log.e("WeightFragment", "Response not successful")
                 }

@@ -34,9 +34,14 @@ class AboutPageFragment : Fragment() {
             resources.getString(R.string.version_number, BuildConfig.VERSION_NAME)
 
         val richardRoller = binding.rickRoll
+        val richardView = binding.rickRollConstraintLayout
+
+        richardRoller.setOnCompletionListener {
+            richardView.visibility = View.GONE
+        }
         val mc = MediaController(requireContext())
         binding.sueMeButton.setOnClickListener {
-            binding.rickRollConstraintLayout.visibility = View.VISIBLE
+            richardView.visibility = View.VISIBLE
             richardRoller.setVideoPath("android.resource://" + requireActivity().packageName + "/" + R.raw.richard_roller)
             richardRoller.setMediaController(mc)
             richardRoller.seekTo(1)

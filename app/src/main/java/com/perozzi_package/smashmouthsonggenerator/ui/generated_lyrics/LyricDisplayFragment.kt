@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentLyricDisplayBinding
@@ -48,8 +47,8 @@ class LyricDisplayFragment : Fragment() {
         ldViewModel = LyricDisplayViewModel(requireActivity().application)
         navController = Navigation.findNavController(view)
 
-        var latestLyrics: String? = resources.getString(R.string.lyrics_go_here)
-        var songTitle = resources.getString(R.string.placeholder_title)
+        var latestLyrics: String?
+        var songTitle: String
 
         val titleEditText = binding.songTitleEditText
         val lyricsEditText = binding.lyricDisplayEditText
@@ -85,7 +84,9 @@ class LyricDisplayFragment : Fragment() {
         }
         binding.generateAgainButton.setOnClickListener { navController.popBackStack() }
         binding.copyLyrics.setOnClickListener {
-            copyToClipboard(requireActivity(), songTitle, latestLyrics!!)
+            songTitle = titleEditText.text.toString()
+            latestLyrics = lyricsEditText.text.toString()
+            latestLyrics?.let { copyToClipboard(requireActivity(), songTitle, it) }
         }
     }
 

@@ -29,6 +29,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/savedSongsGoHereText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_saved_lyrics_will_show_up_here"
+            android:textAlignment="center"
+            app:autoSizeMaxTextSize="40sp"
+            app:autoSizeMinTextSize="6sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            android:paddingVertical="30dp"
+            android:visibility="gone"
+            android:maxLines="1"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/yourMasterpieces" />
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/savedSongsRecyclerView"
             android:layout_width="match_parent"
