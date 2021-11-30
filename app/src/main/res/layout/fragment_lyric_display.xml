@@ -20,7 +20,6 @@
             android:text="@string/your_very_own_generated_smash_mouth_song"
             android:textAlignment="center"
             android:textSize="32sp"
-            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

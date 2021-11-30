@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/how_the_app_works"
                     android:textAlignment="center"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                     android:id="@+id/howItWorksText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/how_it_works"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/about_me_title"
                     android:textAlignment="center"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
                     android:id="@+id/aboutMeText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/about_me"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/copyright"
                     android:textAlignment="center"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +135,7 @@
                     android:id="@+id/pleaseDoNotSue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:text="@string/copyright_text"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -154,6 +154,33 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pleaseDoNotSue" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rickRollConstraintLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/gray"
+                android:visibility="gone"
+                android:padding="5dp"
+                android:paddingTop="-20dp"
+                >
+
+                <VideoView
+                    android:id="@+id/rickRoll"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
