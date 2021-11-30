@@ -27,13 +27,7 @@ class SavedSongsViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     private var savedSongsGridLayoutManager: GridLayoutManager? = GridLayoutManager(
-        application, 2, LinearLayoutManager.VERTICAL, false)
-
-    fun addSavedSong(savedSong: SavedSong) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addSavedSong(savedSong)
-        }
-    }
+        application, 1, LinearLayoutManager.VERTICAL, false)
 
     fun deleteSavedSong(savedSong: SavedSong) {
         viewModelScope.launch(Dispatchers.IO) {

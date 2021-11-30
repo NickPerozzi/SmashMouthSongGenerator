@@ -31,7 +31,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWeightAssignmentBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -42,27 +42,34 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         waViewModel = WeightAssignmentViewModel(requireActivity().application)
 
         waViewModel.prepareDataForAdapter()
-        waViewModel.prepareAlbumRecyclerView(this,binding.albumRecyclerView)
+        waViewModel.prepareAlbumRecyclerView(this, binding.albumRecyclerView)
 
         Glide.with(this).load(R.drawable.somebody_gif_loading).into(binding.loadingIcon)
         val loadingIconLayout = binding.loadingIconConstraintLayout
 
         binding.generateLyricsButton.setOnClickListener { _ ->
-            if (waViewModel.albumWeights.count{it == "0"} == 8) {
+            if (waViewModel.albumWeights.count { it == "0" } == 8) {
                 waViewModel.albumWeights[4] = "1"
             }
             val weights = waViewModel.albumWeights
             lifecycleScope.launchWhenCreated {
                 loadingIconLayout.isVisible = true
                 val response = try {
-                    RetrofitInstance.api.getLyrics(weights[0],weights[1], weights[2], weights[3],
+                    RetrofitInstance.api.getLyrics(
+                        weights[0], weights[1], weights[2], weights[3],
                         weights[4], weights[5], weights[6], weights[7]
                     )
                 } catch (e: IOException) {
-                    Log.e("WeightFragment", "IOException, you might not have internet connection")
+                    Log.e(
+                        resources.getString(R.string.weight_fragment),
+                        resources.getString(R.string.io_error)
+                    )
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e("WeightFragment", "HttpException, unexpected response")
+                    Log.e(
+                        resources.getString(R.string.weight_fragment),
+                        resources.getString(R.string.http_error)
+                    )
                     return@launchWhenCreated
                 }
                 if (response.isSuccessful && response.body() != null) {
@@ -76,6 +83,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
             }
         }
     }
+
     override fun onSeekBarChange(position: Int, weight: Int, textView: TextView) {
         waViewModel.albumWeights[position] = weight.toString()
         textView.text = resources.getString(R.string.album_weight_xxx, weight.toString())

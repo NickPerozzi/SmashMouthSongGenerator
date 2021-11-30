@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/selectedSongTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/song_title_placeholder"
             android:textAlignment="center"
@@ -32,7 +32,11 @@
             android:layout_height="wrap_content"
             android:text="@string/fine_tune"
             android:textAlignment="center"
-            android:textSize="17sp"
+            app:autoSizeMaxTextSize="40sp"
+            app:autoSizeMinTextSize="6sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            android:maxLines="1"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +46,7 @@
             android:id="@+id/lyricsScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:padding="10sp"
             app:layout_constraintBottom_toTopOf="@id/buttonLinearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +56,7 @@
                 android:id="@+id/selectedSongLyrics"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:padding="10sp"
+                android:background="@null"
                 android:text="@string/song_lyrics_placeholder"
                 android:textAlignment="center"
                 android:textSize="14sp"
@@ -59,7 +64,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </ScrollView>
 
         <LinearLayout
@@ -72,12 +76,12 @@
             app:layout_constraintTop_toBottomOf="@id/lyricsScrollView">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/shareButton"
+                android:id="@+id/copyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="@string/share"
+                android:text="@string/copy_lyrics"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -88,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="@string/update_lyrics"
+                android:text="@string/save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

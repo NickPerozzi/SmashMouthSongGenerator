@@ -12,6 +12,9 @@ interface SavedSongDao {
     @Delete
     suspend fun deleteSavedSong(savedSong: SavedSong)
 
+    @Update
+    suspend fun updateSavedSong(savedSong: SavedSong)
+
     @Query("SELECT * FROM saved_songs_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<SavedSong>>
 
