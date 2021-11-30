@@ -12,7 +12,7 @@ import java.util.*
 class WeightAssignmentViewModel(application: Application) : AndroidViewModel(application) {
 
     private var weightGridLayoutManager: GridLayoutManager? =
-        GridLayoutManager(application, 3, LinearLayoutManager.VERTICAL, false)
+        GridLayoutManager(application, 1, LinearLayoutManager.VERTICAL, false)
 
     private val smashMouthDictionary: MutableMap<String, Map<String, Any>> = mutableMapOf(
         Pair(
