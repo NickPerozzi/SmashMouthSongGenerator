@@ -1,11 +1,11 @@
 package com.perozzi_package.smashmouthsonggenerator.ui.about_page
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import com.perozzi_package.smashmouthsonggenerator.BuildConfig
 import com.perozzi_package.smashmouthsonggenerator.R
@@ -33,23 +33,22 @@ class AboutPageFragment : Fragment() {
         binding.versionNumber.text =
             resources.getString(R.string.version_number, BuildConfig.VERSION_NAME)
 
+        val richardRoller = binding.rickRoll
+        val mc = MediaController(requireContext())
         binding.sueMeButton.setOnClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0")
-                )
-            )
+            binding.rickRollConstraintLayout.visibility = View.VISIBLE
+            richardRoller.setVideoPath("android.resource://" + requireActivity().packageName + "/" + R.raw.richard_roller)
+            richardRoller.setMediaController(mc)
+            richardRoller.seekTo(1)
+            richardRoller.start()
         }
 
         binding.shareButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             val body = resources.getString(R.string.download_pitch)
-            val sub = "https://play.google.com/store/apps/details?id=com.perozzi_package.smashmouthsonggenerator"
-            // val sub = "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-            intent.putExtra(Intent.EXTRA_TEXT, "$body $sub")
-            // intent.putExtra(Intent.EXTRA_TEXT, sub)
+            val link = "https://play.google.com/store/apps/details?id=com.perozzi_package.smashmouthsonggenerator"
+            intent.putExtra(Intent.EXTRA_TEXT, "$body $link")
             startActivity(Intent.createChooser(intent, "Share using"))
         }
     }
