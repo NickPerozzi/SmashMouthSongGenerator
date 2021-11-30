@@ -8,21 +8,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentLyricDisplayBinding
+import kotlinx.coroutines.flow.first
 
 class LyricDisplayFragment : Fragment() {
 
     private lateinit var ldViewModel: LyricDisplayViewModel
     private lateinit var navController: NavController
     private lateinit var binding: FragmentLyricDisplayBinding
-    private val args: LyricDisplayFragmentArgs by navArgs()
+    private lateinit var dataStore: DataStore<Preferences>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,16 +43,21 @@ class LyricDisplayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dataStore = requireContext().createDataStore(name = "settings")
+
         ldViewModel = LyricDisplayViewModel(requireActivity().application)
         navController = Navigation.findNavController(view)
 
-        var latestLyrics = args.myPassedLyricsInFragment
+        var latestLyrics: String? = resources.getString(R.string.lyrics_go_here)
         var songTitle = resources.getString(R.string.placeholder_title)
 
         val titleEditText = binding.songTitleEditText
         val lyricsEditText = binding.lyricDisplayEditText
 
-        lyricsEditText.setText(latestLyrics)
+        lifecycleScope.launchWhenCreated {
+            latestLyrics = read("recently generated lyrics")
+            lyricsEditText.setText(latestLyrics ?: resources.getString(R.string.lyrics_go_here))
+        }
 
         val saveLocallyButton = binding.saveLocallyButton
         saveLocallyButton.setOnClickListener {
@@ -66,7 +77,7 @@ class LyricDisplayFragment : Fragment() {
                 ).show()
                 return@setOnClickListener
             }
-            val songToSave = SavedSong(0, songTitle, latestLyrics)
+            val songToSave = SavedSong(0, songTitle, latestLyrics!!)
             insertDataToDatabase(songToSave)
             val action = LyricDisplayFragmentDirections
                 .actionLyricDisplayFragmentToSavedSongsFragment()
@@ -74,7 +85,7 @@ class LyricDisplayFragment : Fragment() {
         }
         binding.generateAgainButton.setOnClickListener { navController.popBackStack() }
         binding.copyLyrics.setOnClickListener {
-            copyToClipboard(requireActivity(), songTitle, latestLyrics)
+            copyToClipboard(requireActivity(), songTitle, latestLyrics!!)
         }
     }
 
@@ -95,5 +106,13 @@ class LyricDisplayFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+
+    private suspend fun read(key: String): String? {
+        val dataStoreKey = preferencesKey<String>(key)
+        val preferences = dataStore.data.first()
+        return preferences[dataStoreKey]
+    }
+
 
 }

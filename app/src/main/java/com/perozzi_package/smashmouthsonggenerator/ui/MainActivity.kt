@@ -3,6 +3,10 @@ package com.perozzi_package.smashmouthsonggenerator.ui
 import android.os.Bundle
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.preferences.core.clear
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.createDataStore
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -30,6 +34,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navMenu.setupWithNavController(navController)
+
+        // Clears the DataStore when the app launches
+        val dataStore = createDataStore(name = "settings")
+        lifecycleScope.launchWhenCreated { dataStore.edit { it.clear() } }
 
         binding.logoSome.setOnClickListener { MediaPlayer.create(this, R.raw.some).start() }
         binding.logoBody.setOnClickListener { MediaPlayer.create(this, R.raw.body).start() }

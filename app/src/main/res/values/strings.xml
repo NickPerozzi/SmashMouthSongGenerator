@@ -22,6 +22,7 @@
     <string name="lyrics_go_here">Your generated lyrics will go here!</string>
     <string name="give_your_song_a_title">Give your song a title</string>
     <string name="give_your_song_a_name">Please give your song a name</string>
+    <string name="you_need_some_weight">Please give at least one album a weight</string>
     <string name="you_need_to_generate_lyrics">Bruh you have to generate a song first</string>
     <string name="cancel">Nope!</string>
     <string name="save_it">Save it!</string>
