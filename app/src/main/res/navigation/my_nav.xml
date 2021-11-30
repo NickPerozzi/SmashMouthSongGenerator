@@ -34,10 +34,6 @@
         android:id="@+id/ic_latest_generated"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.LyricDisplayFragment"
         android:label="LyricDisplayFragment">
-        <argument
-            android:name="myPassedLyricsInFragment"
-            android:defaultValue="Your generated lyrics will go here!"
-            app:argType="string" />
         <action
             android:id="@+id/action_lyricDisplayFragment_to_savedSongsFragment"
             app:destination="@id/ic_saved_sounds"

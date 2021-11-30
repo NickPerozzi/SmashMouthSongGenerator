@@ -6,7 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.createDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -24,6 +30,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
     private lateinit var navController: NavController
     private lateinit var binding: FragmentWeightAssignmentBinding
     private lateinit var waViewModel: WeightAssignmentViewModel
+    private lateinit var dataStore: DataStore<Preferences>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +45,8 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dataStore = requireContext().createDataStore(name = "settings")
+
         navController = Navigation.findNavController(view)
         waViewModel = WeightAssignmentViewModel(requireActivity().application)
 
@@ -49,7 +58,11 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
 
         binding.generateLyricsButton.setOnClickListener { _ ->
             if (waViewModel.albumWeights.count { it == "0" } == 8) {
-                waViewModel.albumWeights[4] = "1"
+                Toast.makeText(
+                    context, resources.getString(R.string.you_need_some_weight),
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
             }
             val weights = waViewModel.albumWeights
             lifecycleScope.launchWhenCreated {
@@ -73,9 +86,10 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
                     return@launchWhenCreated
                 }
                 if (response.isSuccessful && response.body() != null) {
-                    val action = WeightAssignmentFragmentDirections
-                        .actionWeightAssignmentFragmentToLyricDisplayFragment(response.body()!!.lyrics)
-                    navController.navigate(action)
+                    save("recently generated lyrics", response.body()!!.lyrics)
+                    navController.navigate(
+                        R.id.action_weightAssignmentFragment_to_lyricDisplayFragment
+                    )
                 } else {
                     Log.e("WeightFragment", "Response not successful")
                 }
@@ -87,5 +101,12 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
     override fun onSeekBarChange(position: Int, weight: Int, textView: TextView) {
         waViewModel.albumWeights[position] = weight.toString()
         textView.text = resources.getString(R.string.album_weight_xxx, weight.toString())
+    }
+
+    private suspend fun save(key: String, value: String) {
+        val dataStoreKey = preferencesKey<String>(key)
+        dataStore.edit { settings ->
+            settings[dataStoreKey] = value
+        }
     }
 }
