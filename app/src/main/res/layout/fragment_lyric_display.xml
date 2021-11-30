@@ -25,6 +25,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/youCanEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fine_tune"
+            android:textAlignment="center"
+            app:autoSizeMaxTextSize="40sp"
+            app:autoSizeMinTextSize="6sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            android:maxLines="1"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/yourGeneratedSongPrompt" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/titleAndLyricsConstraintLayout"
             android:layout_width="match_parent"
@@ -32,22 +48,24 @@
             app:layout_constraintBottom_toTopOf="@id/songTitleEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/yourGeneratedSongPrompt">
+            app:layout_constraintTop_toBottomOf="@id/youCanEditText">
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/lyricDisplayTextView"
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/lyricDisplayEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:background="@null"
                     android:textAlignment="center"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +114,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="15dp"
-                    android:text="@string/save_locally"
+                    android:text="@string/save"
                     android:textStyle="bold"
                     app:autoSizeMaxTextSize="60sp"
                     app:autoSizeMinTextSize="6sp"
@@ -123,13 +141,13 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Share"
+                    android:id="@+id/copyLyrics"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:padding="15dp"
-                    android:text="@string/share"
+                    android:text="@string/copy"
                     app:autoSizeMaxTextSize="60sp"
                     app:autoSizeMinTextSize="6sp"
                     app:autoSizeStepGranularity="2sp"

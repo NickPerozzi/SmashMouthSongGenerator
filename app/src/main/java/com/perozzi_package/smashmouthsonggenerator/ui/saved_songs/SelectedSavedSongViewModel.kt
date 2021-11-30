@@ -1,4 +1,4 @@
-package com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics
+package com.perozzi_package.smashmouthsonggenerator.ui.saved_songs
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -10,7 +10,7 @@ import com.perozzi_package.smashmouthsonggenerator.data.SavedSongRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LyricDisplayViewModel(application: Application) : AndroidViewModel(application) {
+class SelectedSavedSongViewModel(application: Application) : AndroidViewModel(application) {
 
     private val readAllData: LiveData<List<SavedSong>>
     private val repository: SavedSongRepository
@@ -21,9 +21,9 @@ class LyricDisplayViewModel(application: Application) : AndroidViewModel(applica
         readAllData = repository.readAllData
     }
 
-    fun addSavedSong(savedSong: SavedSong) {
+    fun updateSavedSong(savedSong: SavedSong) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addSavedSong(savedSong)
+            repository.updateSavedSong(savedSong)
         }
     }
 

@@ -14,4 +14,8 @@ class SavedSongRepository(private val savedSongDao: SavedSongDao) {
         savedSongDao.deleteSavedSong(savedSong)
     }
 
+    suspend fun updateSavedSong(savedSong: SavedSong) {
+        savedSongDao.updateSavedSong(savedSong)
+    }
+
 }

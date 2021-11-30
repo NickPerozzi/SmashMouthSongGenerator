@@ -50,18 +50,6 @@
         android:id="@+id/ic_saved_sounds"
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsFragment"
         android:label="SavedSongsFragment">
-        <argument
-            android:name="lyricsToSave"
-            android:defaultValue="lyrics lyrics yeah"
-            app:argType="string" />
-        <argument
-            android:name="songTitleToSave"
-            android:defaultValue="song title yeah"
-            app:argType="string" />
-        <argument
-            android:name="isThisANewSong"
-            android:defaultValue="false"
-            app:argType="boolean" />
         <action
             android:id="@+id/action_savedSongsFragment_to_selectedSavedSongFragment"
             app:destination="@id/selectedSavedSongFragment" />
@@ -75,14 +63,6 @@
         android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SelectedSavedSongFragment"
         android:label="fragment_selected_saved_song"
         tools:layout="@layout/fragment_selected_saved_song">
-        <argument
-            android:name="savedItemLyrics"
-            android:defaultValue="your special lyrics"
-            app:argType="string" />
-        <argument
-            android:name="savedItemTitle"
-            android:defaultValue="your special title"
-            app:argType="string" />
         <argument
             android:name="savedItemObject"
             app:argType="com.perozzi_package.smashmouthsonggenerator.data.SavedSong" />

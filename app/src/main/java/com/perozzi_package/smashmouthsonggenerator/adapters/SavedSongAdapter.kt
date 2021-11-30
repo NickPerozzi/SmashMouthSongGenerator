@@ -19,7 +19,7 @@ class SavedSongAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val itemHolder = LayoutInflater.from(parent.context)
-            .inflate(R.layout.saved_song_item_layout,parent,false)
+            .inflate(R.layout.saved_song_item_layout, parent, false)
         return ItemHolder(itemHolder)
     }
 
@@ -29,18 +29,23 @@ class SavedSongAdapter(
 
         // Hey this code probably shouldn't be in the adapter!
         holder.itemView.setOnClickListener {
-            val action = SavedSongsFragmentDirections
-                .actionSavedSongsFragmentToSelectedSavedSongFragment(
-                    getItem(position).songLyrics,
-                    getItem(position).songTitle,
-                    getItem(position)
-                )
+            val action = if (position >= itemCount) {
+                SavedSongsFragmentDirections
+                    .actionSavedSongsFragmentToSelectedSavedSongFragment(
+                        getItem(itemCount - 1)
+                    )
+            } else {
+                SavedSongsFragmentDirections
+                    .actionSavedSongsFragmentToSelectedSavedSongFragment(
+                        getItem(position)
+                    )
+            }
             Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
 
     inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-    View.OnClickListener {
+        View.OnClickListener {
         var title: TextView = itemView.findViewById(R.id.songTitle)
         var lyrics: TextView = itemView.findViewById(R.id.songLyrics)
         private var deleteButton: ImageButton = itemView.findViewById(R.id.deleteButton)
