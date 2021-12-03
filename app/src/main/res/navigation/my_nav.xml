@@ -56,7 +56,7 @@
         android:label="AboutPageFragment" />
     <fragment
         android:id="@+id/selectedSavedSongFragment"
-        android:name="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SelectedSavedSongFragment"
+        android:name="com.perozzi_package.smashmouthsonggenerator.ui.selected_saved_song.SelectedSavedSongFragment"
         android:label="fragment_selected_saved_song"
         tools:layout="@layout/fragment_selected_saved_song">
         <argument

@@ -1,4 +1,4 @@
-package com.perozzi_package.smashmouthsonggenerator.ui.saved_songs
+package com.perozzi_package.smashmouthsonggenerator.ui.selected_saved_song
 
 import android.content.ClipData
 import android.content.ClipboardManager

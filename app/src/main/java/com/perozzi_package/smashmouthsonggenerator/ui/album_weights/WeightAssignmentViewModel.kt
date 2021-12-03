@@ -117,31 +117,3 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
         adapter.submitList(arrayForAlbumGrid)
     }
 }
-
-/*
-
-    fun getCurrentWeights(): MutableList<String> {
-        val stringList = mutableListOf<String>()
-        for (weight in albumWeights) {
-            stringList.add(weight.toString())
-        }
-        return stringList
-    }
-
-    suspend fun getTheLyrics(weights: MutableList<String>) {
-        RetrofitInstance.api.getLyrics(
-            weights[0], weights[1], weights[2], weights[3],
-            weights[4], weights[5], weights[6], weights[7]
-        )
-    }
-
-    inner class smashMouthAlbum(val name: String, val year: String, val imageAddress: Int)
-    val fush_yu_mang: smashMouthAlbum = smashMouthAlbum("Fush Yu Mang", "1997", R.drawable.alb_1_fush_yu_mang_97)
-    val astro_lounge = smashMouthAlbum("Astro Lounge", "1999", R.drawable.alb_2_astro_lounge_99)
-    val smash_mouth = smashMouthAlbum("Smash Mouth", "2001", R.drawable.alb_3_smash_mouth_01)
-    val get_the_picture = smashMouthAlbum("Get the Picture", "2003", R.drawable.alb_4_get_the_picture_03)
-    val all_star_smash_hits = smashMouthAlbum("All Star Smash Hits", "2005", R.drawable.alb_5_all_star_smash_hits_05)
-    val the_gift_of_rock = smashMouthAlbum("The Gift of Rock", "2005", R.drawable.alb_6_the_gift_of_rock_05)
-    val summer_girl = smashMouthAlbum("Summer Girl", "2006", R.drawable.alb_7_summer_girl_06)
-    val magic = smashMouthAlbum("Magic", "2012", R.drawable.alb_8_magic_12)
-*/
