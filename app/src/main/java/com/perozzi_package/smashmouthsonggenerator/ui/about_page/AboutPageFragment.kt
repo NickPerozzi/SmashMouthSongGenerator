@@ -39,13 +39,11 @@ class AboutPageFragment : Fragment() {
         richardRoller.setOnCompletionListener {
             richardView.visibility = View.GONE
         }
+
         val mc = MediaController(requireContext())
         binding.sueMeButton.setOnClickListener {
             richardView.visibility = View.VISIBLE
-            richardRoller.setVideoPath("android.resource://" + requireActivity().packageName + "/" + R.raw.richard_roller)
-            richardRoller.setMediaController(mc)
-            richardRoller.seekTo(1)
-            richardRoller.start()
+            apViewModel.startVideo(richardRoller, mc, requireActivity())
         }
 
         binding.shareButton.setOnClickListener {

@@ -14,6 +14,9 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
     private var weightGridLayoutManager: GridLayoutManager? =
         GridLayoutManager(application, 1, LinearLayoutManager.VERTICAL, false)
 
+    // Eventually, this data will not be needed here since it will be scraped from elsewhere.
+    // The layout of this Smash Mouth data is a sample for how all artists' data will look, once
+    // the functionality is implemented (images will be grabbed via url)
     private val smashMouthDictionary: MutableMap<String, Map<String, Any>> = mutableMapOf(
         Pair(
             "fush_yu_mang", mapOf(
@@ -74,6 +77,7 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
         )
     )
 
+    // Suppressed because map.indices (the suggestion) is incompatible with map's type
     @Suppress("ReplaceManualRangeWithIndicesCalls")
     private fun oneWeights(map: MutableMap<String, Map<String, Any>>): MutableList<String> {
         val stringList = mutableListOf<String>()
@@ -83,12 +87,12 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
     }
 
     var albumWeights = oneWeights(smashMouthDictionary)
-
-    private val yearsList = mutableListOf<String>()
-    private val titlesList = mutableListOf<String>()
-    private val imageAddressList = mutableListOf<Int>()
     private var arrayForAlbumGrid: ArrayList<AlbumGrid> = arrayListOf()
+
     fun prepareDataForAdapter() {
+        val yearsList = mutableListOf<String>()
+        val titlesList = mutableListOf<String>()
+        val imageAddressList = mutableListOf<Int>()
         for (album in smashMouthDictionary.keys) {
             yearsList.add(smashMouthDictionary[album]!!["year"] as String)
             titlesList.add(smashMouthDictionary[album]!!["name"] as String)
@@ -115,5 +119,38 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
         val adapter = AlbumGridAdapter(thisInterface)
         recyclerView.adapter = adapter
         adapter.submitList(arrayForAlbumGrid)
+    }
+
+    // This could be a lambda, but the function name provides clarity to its purpose
+    fun areThereAnyNonZeroWeights() : Boolean {
+        return albumWeights.count { it == "0" } != 8
+    }
+
+    fun calibrateRedundantWeighting() {
+        // If the weights are [5, 5, 0, 0, 5, 0, 0, 5], it changes to [1, 1, 0, 0, 1, 0, 0, 1]
+        // to reduce time on API call
+        if (albumWeights.all {it == albumWeights[0] || it == '0'.toString()}
+            && (albumWeights[0] != '0'.toString())
+            && (albumWeights[0] != '1'.toString())
+        ) {
+            for (index in 0 until albumWeights.size) {
+                if (albumWeights[index] != '0'.toString()) {
+                    albumWeights[index] = '1'.toString()
+                }
+            }
+        }
+        // If the weights are [2, 4, 2, 4, 0, 0, 2, 4], it changes to [1, 2, 1, 2, 0, 0, 1, 2]
+        // to reduce time on API call
+        if (albumWeights.all {it.toInt() % 2 == 0 || it == '0'.toString()}
+            && (albumWeights[0] != '0'.toString())
+            && (albumWeights[0] != '1'.toString())
+        ) {
+            for (index in 0 until albumWeights.size) {
+                if (albumWeights[index] != '0'.toString()) {
+                    albumWeights[index] = (albumWeights[index].toInt() / 2).toString()
+                }
+            }
+        }
+
     }
 }

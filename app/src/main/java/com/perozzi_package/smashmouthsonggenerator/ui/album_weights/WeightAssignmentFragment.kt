@@ -48,6 +48,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         dataStore = requireContext().createDataStore(name = "settings")
 
         navController = Navigation.findNavController(view)
+
         waViewModel = WeightAssignmentViewModel(requireActivity().application)
 
         waViewModel.prepareDataForAdapter()
@@ -56,14 +57,15 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         Glide.with(this).load(R.drawable.somebody_gif_loading).into(binding.loadingIcon)
         val loadingIconLayout = binding.loadingIconConstraintLayout
 
-        binding.generateLyricsButton.setOnClickListener { _ ->
-            if (waViewModel.albumWeights.count { it == "0" } == 8) {
+        binding.generateLyricsButton.setOnClickListener {
+            if (!waViewModel.areThereAnyNonZeroWeights()) {
                 Toast.makeText(
                     context, resources.getString(R.string.you_need_some_weight),
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
             }
+            waViewModel.calibrateRedundantWeighting()
             val weights = waViewModel.albumWeights
             lifecycleScope.launchWhenCreated {
                 loadingIconLayout.isVisible = true
@@ -73,20 +75,14 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
                         weights[4], weights[5], weights[6], weights[7]
                     )
                 } catch (e: IOException) {
-                    Log.e(
-                        resources.getString(R.string.weight_fragment),
-                        resources.getString(R.string.io_error)
-                    )
+                    Log.e(resources.getString(R.string.weight_fragment), resources.getString(R.string.io_error))
                     return@launchWhenCreated
                 } catch (e: HttpException) {
-                    Log.e(
-                        resources.getString(R.string.weight_fragment),
-                        resources.getString(R.string.http_error)
-                    )
+                    Log.e(resources.getString(R.string.weight_fragment), resources.getString(R.string.http_error))
                     return@launchWhenCreated
                 }
                 if (response.isSuccessful && response.body() != null) {
-                    save("recently generated lyrics", response.body()!!.lyrics)
+                    save(getString(R.string.recently_generated_lyrics), response.body()!!.lyrics)
                     try {
                         navController.navigate(
                             R.id.action_weightAssignmentFragment_to_lyricDisplayFragment
@@ -98,7 +94,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
                         ).show()
                     }
                 } else {
-                    Log.e("WeightFragment", "Response not successful")
+                    Log.e(getString(R.string.weight_fragment), getString(R.string.response_not_successful))
                 }
                 loadingIconLayout.isVisible = false
             }

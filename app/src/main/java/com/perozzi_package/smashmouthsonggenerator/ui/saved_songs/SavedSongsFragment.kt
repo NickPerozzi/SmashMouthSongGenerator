@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.adapters.SavedSongAdapter
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentSavedSongsBinding
@@ -56,12 +57,12 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
         builder.setNegativeButton("Nah") { _, _ ->
             Toast.makeText(
                 requireContext(),
-                "Heck yeah",
+                getString(R.string.heck_yeah),
                 Toast.LENGTH_SHORT
             ).show()
         }
-        builder.setTitle("Delete \"${savedSong.songTitle}\"?")
-        builder.setMessage("You sure you want to delete this absolute banger?")
+        builder.setTitle(getString(R.string.delete_song_prompt,savedSong.songTitle))
+        builder.setMessage(getString(R.string.you_sure_you_want_to_delete))
         builder.create().show()
     }
 
