@@ -6,6 +6,7 @@
     <string name="album_title_goes_here">album title goes here</string>
     <string name="yyyy">(YYYY)</string>
     <string name="album_weight_placeholder">Album weight: 1/5</string>
+    <string name="delete_song_prompt">Delete \"%1$s\"?</string>
     <string name="album_weight_xxx">Album weight: %1$s/5</string>
     <string name="placeholder_lyrics">(Verse)\nYou\'re a frying pan la rio chinatown if\nyou realize i\'m just in tryin\'\nall the time i know your\n(Chorus)\nWoman i\'m doing what i hit the\nsun catches up the way she knows that\nshe will always get started and i can\nwith a room with\na believer i wanted sunshine i want\nsomeone anyone and they don\'t you\n(Verse)\nTripped and zen and we\'re kept\ndown but you\'re a trace of you\nthe tiger by the morning comes to find\n(Chorus)\nWoman i\'m doing what i hit the\nsun catches up the way she knows that\nshe will always get started and i can\nwith a room with\na believer i wanted sunshine i want\nsomeone anyone and they don\'t you</string>
     <string name="placeholder_title">My Smashterpiece</string>
@@ -23,7 +24,7 @@
     <string name="give_your_song_a_title">Give your song a title</string>
     <string name="give_your_song_a_name">Please give your song a name</string>
     <string name="you_need_some_weight">Please give at least one album a weight</string>
-    <string name="your_lyrics_are_ready">Your lyrics are ready for you in the "Lyrics" tab</string>
+    <string name="your_lyrics_are_ready">Your lyrics are ready for you in the \"Lyrics\" tab</string>
     <string name="you_need_to_generate_lyrics">Bruh you have to generate a song first</string>
     <string name="cancel">Nope!</string>
     <string name="save_it">Save it!</string>
@@ -49,4 +50,8 @@
     <string name="copy_lyrics">Copy Lyrics</string>
     <string name="download_pitch">Download someBODY, the leading app for generating lyrics from worldwide hit sensation Smash Mouth!</string>
     <string name="your_saved_lyrics_will_show_up_here">Your saved lyrics will show up here!</string>
+    <string name="response_not_successful">Response not successful</string>
+    <string name="recently_generated_lyrics">recently generated lyrics</string>
+    <string name="heck_yeah">Heck yeah</string>
+    <string name="you_sure_you_want_to_delete">You sure you want to delete this absolute banger?</string>
 </resources>
