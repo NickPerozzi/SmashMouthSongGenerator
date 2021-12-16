@@ -17,6 +17,7 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
     // Eventually, this data will not be needed here since it will be scraped from elsewhere.
     // The layout of this Smash Mouth data is a sample for how all artists' data will look, once
     // the functionality is implemented (images will be grabbed via url)
+    // TODO(For loop that does this guy JSONObject(smashMouthDictionary["fush_yu_mang"]).toString()
     private val smashMouthDictionary: MutableMap<String, Map<String, Any>> = mutableMapOf(
         Pair(
             "fush_yu_mang", mapOf(
@@ -121,36 +122,47 @@ class WeightAssignmentViewModel(application: Application) : AndroidViewModel(app
         adapter.submitList(arrayForAlbumGrid)
     }
 
-    // This could be a lambda, but the function name provides clarity to its purpose
-    fun areThereAnyNonZeroWeights() : Boolean {
-        return albumWeights.count { it == "0" } != 8
-    }
+    // This could be a lambda, but the function name provides clarity to its purpose and syntax
+    fun areThereAnyNonZeroWeights(): Boolean = albumWeights.count { it == "0" } != albumWeights.size
 
     fun calibrateRedundantWeighting() {
-        // If the weights are [5, 5, 0, 0, 5, 0, 0, 5], it changes to [1, 1, 0, 0, 1, 0, 0, 1]
-        // to reduce time on API call
-        if (albumWeights.all {it == albumWeights[0] || it == '0'.toString()}
-            && (albumWeights[0] != '0'.toString())
-            && (albumWeights[0] != '1'.toString())
-        ) {
-            for (index in 0 until albumWeights.size) {
-                if (albumWeights[index] != '0'.toString()) {
-                    albumWeights[index] = '1'.toString()
+        for (index in 0 until albumWeights.size) {
+
+            if (albumWeights.all { it == albumWeights[index] || it == "0" }) {
+                for (index2 in 0 until albumWeights.size) {
+                    if (albumWeights[index2] != "0") {
+                        albumWeights[index2] = "1"
+                    }
                 }
-            }
-        }
-        // If the weights are [2, 4, 2, 4, 0, 0, 2, 4], it changes to [1, 2, 1, 2, 0, 0, 1, 2]
-        // to reduce time on API call
-        if (albumWeights.all {it.toInt() % 2 == 0 || it == '0'.toString()}
-            && (albumWeights[0] != '0'.toString())
-            && (albumWeights[0] != '1'.toString())
-        ) {
-            for (index in 0 until albumWeights.size) {
-                if (albumWeights[index] != '0'.toString()) {
+                return
+            } else if (albumWeights.all { it.toInt() % 2 == 0 }) {
+                for (index2 in 0 until albumWeights.size) {
                     albumWeights[index] = (albumWeights[index].toInt() / 2).toString()
                 }
+                return
             }
         }
-
     }
+
+    val albumWeightsMap = mutableMapOf(
+        "Fush Yu Mang" to 1,
+        "Astro Lounge" to 1,
+        "Smash Mouth" to 1,
+        "Get the Picture" to 1,
+        "All Star Smash Hits" to 1,
+        "The Gift of Rock" to 1,
+        "Summer Girl" to 1,
+        "Magic" to 1
+    )
+
+    fun calibrateRedundantWeighting2() {
+        val temp = albumWeightsMap.filter { entry -> entry.value != 0 }
+        if (temp.values.all { it == temp.values.elementAt(0) }) {
+            val temp2 = temp.map { it.value / it.value }
+        }
+    }
+
 }
+
+
+

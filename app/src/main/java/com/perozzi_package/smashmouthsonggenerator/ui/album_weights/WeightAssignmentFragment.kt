@@ -24,6 +24,7 @@ import com.perozzi_package.smashmouthsonggenerator.api.RetrofitInstance
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentWeightAssignmentBinding
 import retrofit2.HttpException
 import java.io.IOException
+import java.lang.reflect.TypeVariable
 
 class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeListenerInterface {
 
@@ -59,20 +60,17 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
 
         binding.generateLyricsButton.setOnClickListener {
             if (!waViewModel.areThereAnyNonZeroWeights()) {
-                Toast.makeText(
-                    context, resources.getString(R.string.you_need_some_weight),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, resources.getString(R.string.you_need_some_weight), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             waViewModel.calibrateRedundantWeighting()
-            val weights = waViewModel.albumWeights
+
+            // The api call should be placed elsewhere (create its own repository?)
             lifecycleScope.launchWhenCreated {
                 loadingIconLayout.isVisible = true
                 val response = try {
                     RetrofitInstance.api.getLyrics(
-                        weights[0], weights[1], weights[2], weights[3],
-                        weights[4], weights[5], weights[6], weights[7]
+                        mapOf()
                     )
                 } catch (e: IOException) {
                     Log.e(resources.getString(R.string.weight_fragment), resources.getString(R.string.io_error))
@@ -101,8 +99,9 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         }
     }
 
-    override fun onSeekBarChange(position: Int, weight: Int, textView: TextView) {
+    override fun onSeekBarChange(position: Int, weight: Int, textView: TextView, albumName: String?) {
         waViewModel.albumWeights[position] = weight.toString()
+        albumName?.let { waViewModel.albumWeightsMap[it] = weight }
         textView.text = resources.getString(R.string.album_weight_xxx, weight.toString())
     }
 

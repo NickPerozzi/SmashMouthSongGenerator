@@ -27,9 +27,9 @@ class AlbumGridAdapter(
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val albumGrid : AlbumGrid = getItem(position)
         holder.image.setImageResource(albumGrid.albumImage!!)
-        holder.year.text = getItem(position).albumYear
-        holder.title.text = getItem(position).albumName
-        holder.weightBar.progress = getItem(position).albumWeight!!.toInt()
+        holder.year.text = albumGrid.albumYear
+        holder.title.text = albumGrid.albumName
+        holder.weightBar.progress = albumGrid.albumWeight!!.toInt()
         holder.weightText.text = "Album weight: ${getItem(position).albumWeight}/5"
 
     }
@@ -49,7 +49,7 @@ class AlbumGridAdapter(
         override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
             val position: Int = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                listener.onSeekBarChange(position, p1, weightText)
+                listener.onSeekBarChange(position, p1, weightText, getItem(position).albumName)
                 weightBar.progress = p1
             }
         }
@@ -60,7 +60,7 @@ class AlbumGridAdapter(
     }
 
     interface OnSeekBarChangeListenerInterface {
-        fun onSeekBarChange(position: Int, weight: Int, textView: TextView)
+        fun onSeekBarChange(position: Int, weight: Int, textView: TextView, albumName: String?)
     }
 }
 
