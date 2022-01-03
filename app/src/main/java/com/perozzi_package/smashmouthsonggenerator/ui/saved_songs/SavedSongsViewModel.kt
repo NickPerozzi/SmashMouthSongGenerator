@@ -1,9 +1,8 @@
 package com.perozzi_package.smashmouthsonggenerator.ui.saved_songs
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +26,16 @@ class SavedSongsViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     private var savedSongsGridLayoutManager: GridLayoutManager? = GridLayoutManager(
-        application, 1, LinearLayoutManager.VERTICAL, false)
+        application, 1, LinearLayoutManager.VERTICAL, false
+    )
+
+    var savedSongsGoHereTextVisibility: MutableLiveData<Int> = readAllData.map{
+        if (readAllData.value?.size == 0) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+    } as MutableLiveData<Int>
 
     fun deleteSavedSong(savedSong: SavedSong) {
         viewModelScope.launch(Dispatchers.IO) {

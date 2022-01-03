@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
 import androidx.fragment.app.Fragment
-import com.perozzi_package.smashmouthsonggenerator.BuildConfig
 import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentAboutPageBinding
 
@@ -28,10 +27,9 @@ class AboutPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        apViewModel = AboutPageViewModel(requireActivity().application)
+        apViewModel = AboutPageViewModel(requireActivity().application, requireActivity().resources)
 
-        binding.versionNumber.text =
-            resources.getString(R.string.version_number, BuildConfig.VERSION_NAME)
+        binding.versionNumber.text = apViewModel.versionNumber
 
         val richardRoller = binding.rickRoll
         val richardView = binding.rickRollConstraintLayout

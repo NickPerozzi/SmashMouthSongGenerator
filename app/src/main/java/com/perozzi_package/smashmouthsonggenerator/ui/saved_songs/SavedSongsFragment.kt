@@ -32,14 +32,10 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
 
         val ssAdapter = SavedSongAdapter(this as SavedSongAdapter.OnClickDeleteInterface)
         ssViewModel.prepareSavedSongsRecyclerView(this, binding.savedSongsRecyclerView)
+        binding.savedSongsViewModel = ssViewModel
         binding.savedSongsRecyclerView.adapter = ssAdapter
         ssViewModel.readAllData.observe(viewLifecycleOwner, {
             ssAdapter.submitList(it)
-            if (ssViewModel.readAllData.value?.size == 0) {
-                binding.savedSongsGoHereText.visibility = View.VISIBLE
-            } else {
-                binding.savedSongsGoHereText.visibility = View.GONE
-            }
         })
 
     }

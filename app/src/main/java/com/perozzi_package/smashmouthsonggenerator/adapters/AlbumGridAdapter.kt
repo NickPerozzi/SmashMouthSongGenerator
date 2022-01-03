@@ -26,10 +26,10 @@ class AlbumGridAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val albumGrid : AlbumGrid = getItem(position)
-        holder.image.setImageResource(albumGrid.albumImage!!)
+        albumGrid.albumImage?.let { holder.image.setImageResource(it) }
         holder.year.text = albumGrid.albumYear
         holder.title.text = albumGrid.albumName
-        holder.weightBar.progress = albumGrid.albumWeight!!.toInt()
+        albumGrid.albumWeight?.let { holder.weightBar.progress = it }
         holder.weightText.text = "Album weight: ${getItem(position).albumWeight}/5"
 
     }

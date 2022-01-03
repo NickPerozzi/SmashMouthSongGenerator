@@ -15,9 +15,6 @@
     <string name="share">Share</string>
     <string name="copy">Copy</string>
     <string name="your_very_own_generated_smash_mouth_song">Your very own generated Smash Mouth song:</string>
-    <string name="io_error">IOException, you might not have internet connection</string>
-    <string name="weight_fragment">WeightFragment</string>
-    <string name="http_error">HttpException, unexpected response</string>
     <string name="generating_your_lyrics">Generating your lyrics…</string>
     <string name="save_your_song">Save your song!</string>
     <string name="lyrics_go_here">Your generated lyrics will go here!</string>
@@ -35,7 +32,7 @@
     <string name="song_lyrics_placeholder">song lyrics placeholder</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="how_the_app_works">How the app works</string>
-    <string name="about_me">I made this app to strengthen my Android knowledge in pursuit of an internship and/or job. If you have any questions or concerns, feel free to reach out to me at perozzi.n@gmail.com. Thanks for your time, and I hope you enjoy the app!</string>
+    <string name="about_me">I made this app to strengthen my Android knowledge in pursuit of a career in Android development. If you have any questions or concerns, feel free to reach out to me at perozzi.n@gmail.com. Thanks for your time, and I hope you enjoy the app!</string>
     <string name="about_me_title">About the app</string>
     <string name="copyright">Copyright</string>
     <string name="copyright_text">I don\'t own the rights to any Smash Mouth music please do not sue me I am not making any money from this app I promise</string>
@@ -51,7 +48,6 @@
     <string name="download_pitch">Download someBODY, the leading app for generating lyrics from worldwide hit sensation Smash Mouth!</string>
     <string name="your_saved_lyrics_will_show_up_here">Your saved lyrics will show up here!</string>
     <string name="response_not_successful">Response not successful</string>
-    <string name="recently_generated_lyrics">recently generated lyrics</string>
     <string name="heck_yeah">Heck yeah</string>
     <string name="you_sure_you_want_to_delete">You sure you want to delete this absolute banger?</string>
 </resources>
