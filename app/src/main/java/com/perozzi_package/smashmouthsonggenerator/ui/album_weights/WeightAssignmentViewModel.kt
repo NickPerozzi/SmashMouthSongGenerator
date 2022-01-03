@@ -142,7 +142,7 @@ class WeightAssignmentViewModel(application: Application) :
     fun areThereAnyNonZeroWeights(): Boolean =
         albumWeightsMap.values.count { it == 0 } != albumWeightsMap.size
 
-    fun retrieveLyricsFromAPI() {
+    fun retrieveLyrics() {
         viewModelScope.launch {
             lyricGenerationStatus.value = "During"
             val generatedLyrics = repository.getGeneratedLyrics(albumWeightsMap)

@@ -54,7 +54,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
                 ).show()
                 return@setOnClickListener
             }
-            waViewModel.retrieveLyricsFromAPI()
+            waViewModel.retrieveLyrics()
         }
 
         waViewModel.lyricGenerationStatus.observe(viewLifecycleOwner, {
