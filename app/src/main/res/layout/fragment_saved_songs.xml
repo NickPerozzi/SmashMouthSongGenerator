@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="lyricDisplayViewModel"
-            type="com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.LyricDisplayViewModel" />
+            name="savedSongsViewModel"
+            type="com.perozzi_package.smashmouthsonggenerator.ui.saved_songs.SavedSongsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             android:paddingVertical="30dp"
-            android:visibility="gone"
+            android:visibility="@{savedSongsViewModel.savedSongsGoHereTextVisibility}"
             android:maxLines="1"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,11 @@
 package com.perozzi_package.smashmouthsonggenerator.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.perozzi_package.smashmouthsonggenerator.api.RetrofitInstance
+import com.perozzi_package.smashmouthsonggenerator.ui.generated_lyrics.Lyrics
+import retrofit2.HttpException
+import java.io.IOException
 
 class SavedSongRepository(private val savedSongDao: SavedSongDao) {
 
@@ -17,5 +22,4 @@ class SavedSongRepository(private val savedSongDao: SavedSongDao) {
     suspend fun updateSavedSong(savedSong: SavedSong) {
         savedSongDao.updateSavedSong(savedSong)
     }
-
 }
