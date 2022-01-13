@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".koin.someBODY"
         android:theme="@style/Theme.SmashMouthSongGenerator">
         <activity
             android:name="com.perozzi_package.smashmouthsonggenerator.ui.MainActivity"

@@ -9,7 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.perozzi_package.smashmouthsonggenerator.BuildConfig
 import com.perozzi_package.smashmouthsonggenerator.R
 
-class AboutPageViewModel(application: Application, private val resources: Resources) : AndroidViewModel(application) {
+class AboutPageViewModel(application: Application, resources: Resources) : AndroidViewModel(application) {
 
     val versionNumber = resources.getString(R.string.version_number, BuildConfig.VERSION_NAME)
 

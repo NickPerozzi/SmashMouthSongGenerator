@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.perozzi_package.smashmouthsonggenerator.*
 import com.perozzi_package.smashmouthsonggenerator.adapters.AlbumGridAdapter
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentWeightAssignmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeListenerInterface {
 
-    private lateinit var navController: NavController
+    private val waViewModel: WeightAssignmentViewModel by viewModel()
+
     private lateinit var binding: FragmentWeightAssignmentBinding
-    private lateinit var waViewModel: WeightAssignmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,13 +33,11 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
-
-        waViewModel = WeightAssignmentViewModel(requireActivity().application)
         binding.weightAssignmentViewModel = waViewModel
+        waViewModel.lyricGenerationStatus.value = "Before"
 
         waViewModel.prepareDataForAdapter()
-        waViewModel.prepareAlbumRecyclerView(this, binding.albumRecyclerView)
+        activity?.let { waViewModel.prepareAlbumRecyclerView(this, binding.albumRecyclerView, it.application) }
 
         waViewModel.loadingIconVisibility.value = View.GONE
 
@@ -60,7 +58,7 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         waViewModel.lyricGenerationStatus.observe(viewLifecycleOwner, {
             if (it == "After") {
                 try {
-                    navController.navigate(
+                    Navigation.findNavController(view).navigate(
                         R.id.action_weightAssignmentFragment_to_lyricDisplayFragment
                     )
                 } catch (e: IllegalArgumentException) {
@@ -82,5 +80,4 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
         albumName?.let { waViewModel.albumWeightsMap[it] = weight }
         textView.text = resources.getString(R.string.album_weight_xxx, weight.toString())
     }
-
 }

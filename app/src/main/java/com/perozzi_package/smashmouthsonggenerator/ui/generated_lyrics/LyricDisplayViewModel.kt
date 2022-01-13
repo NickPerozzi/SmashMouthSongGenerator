@@ -10,7 +10,7 @@ import com.perozzi_package.smashmouthsonggenerator.data.SavedSongRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LyricDisplayViewModel(application: Application) : AndroidViewModel(application) {
+class LyricDisplayViewModel(application: Application/*, val repo: SavedSongRepository*/) : AndroidViewModel(application) {
 
     private val readAllData: LiveData<List<SavedSong>>
     private val repository: SavedSongRepository
