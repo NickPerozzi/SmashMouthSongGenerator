@@ -10,10 +10,12 @@ import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.adapters.SavedSongAdapter
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentSavedSongsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
 
-    private lateinit var ssViewModel: SavedSongsViewModel
+    private val ssViewModel: SavedSongsViewModel by viewModel()
+
     private lateinit var binding: FragmentSavedSongsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +29,6 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        ssViewModel = SavedSongsViewModel(requireActivity().application)
 
         val ssAdapter = SavedSongAdapter(this as SavedSongAdapter.OnClickDeleteInterface)
         ssViewModel.prepareSavedSongsRecyclerView(this, binding.savedSongsRecyclerView)

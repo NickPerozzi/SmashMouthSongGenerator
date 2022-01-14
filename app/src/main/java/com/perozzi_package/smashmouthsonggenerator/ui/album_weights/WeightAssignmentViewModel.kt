@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.perozzi_package.smashmouthsonggenerator.adapters.AlbumGridAdapter
-import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.data.DiscographyRepository
 import com.perozzi_package.smashmouthsonggenerator.data.GeneratedLyricsRepository
 import com.perozzi_package.smashmouthsonggenerator.koin.ImportantClass
@@ -22,12 +21,10 @@ import java.util.*
 class WeightAssignmentViewModel(
     application: Application,
     importantClass: ImportantClass,
-    discographyRepository: DiscographyRepository,
+    private val discographyRepository: DiscographyRepository,
     private val generatedLyricsRepository: GeneratedLyricsRepository
 ) :
     ViewModel() {
-
-    private val artistDiscography = discographyRepository.smashMouthDiscography
 
     var lyricGenerationStatus: MutableLiveData<String> = MutableLiveData("Before")
 
@@ -35,7 +32,6 @@ class WeightAssignmentViewModel(
     init {
         importantClass.createImportantString()
     }
-
 
     private val dataStore: DataStore<Preferences> = application.createDataStore(name = "settings")
 
@@ -49,6 +45,7 @@ class WeightAssignmentViewModel(
     } as MutableLiveData<Int>
 
     fun prepareDataForAdapter(): ArrayList<AlbumGrid> {
+        val artistDiscography = discographyRepository.smashMouthDiscography
         val arrayForAlbumGrid: ArrayList<AlbumGrid> = arrayListOf()
         val yearsList = mutableListOf<String>()
         val titlesList = mutableListOf<String>()
@@ -73,6 +70,7 @@ class WeightAssignmentViewModel(
     }
 
     private fun createAlbumWeightsMap(): MutableMap<String,Int> {
+        val artistDiscography = discographyRepository.smashMouthDiscography
         val tempKeys: MutableList<String> = mutableListOf()
         val tempValues: MutableList<Int> = mutableListOf()
         for (album in artistDiscography.keys) {
@@ -82,7 +80,7 @@ class WeightAssignmentViewModel(
         return tempKeys.zip(tempValues).toMap().toMutableMap()
     }
 
-    val albumWeightsMap = createAlbumWeightsMap()
+    val albumWeightsMap: MutableMap<String,Int> = createAlbumWeightsMap()
 
     fun prepareAlbumRecyclerView(
         thisInterface: AlbumGridAdapter.OnSeekBarChangeListenerInterface,
@@ -103,12 +101,12 @@ class WeightAssignmentViewModel(
         viewModelScope.launch {
             lyricGenerationStatus.value = "During"
             val generatedLyrics = generatedLyricsRepository.getGeneratedLyrics(albumWeightsMap)
-            generatedLyrics?.let { save("recently generated lyrics", it.lyrics) }
+            generatedLyrics?.let { dataStoreSave("recently generated lyrics", it.lyrics) }
             lyricGenerationStatus.value = "After"
         }
     }
 
-    private suspend fun save(key: String, value: String) {
+    private suspend fun dataStoreSave(key: String, value: String) {
         val dataStoreKey = preferencesKey<String>(key)
         dataStore.edit { settings ->
             settings[dataStoreKey] = value

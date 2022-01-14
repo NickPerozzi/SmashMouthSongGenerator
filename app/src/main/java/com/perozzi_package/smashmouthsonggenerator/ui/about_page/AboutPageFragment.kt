@@ -9,11 +9,14 @@ import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentAboutPageBinding
+import com.perozzi_package.smashmouthsonggenerator.ui.album_weights.WeightAssignmentViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutPageFragment : Fragment() {
 
+    private val apViewModel: AboutPageViewModel by viewModel()
+
     private lateinit var binding: FragmentAboutPageBinding
-    private lateinit var apViewModel: AboutPageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +30,6 @@ class AboutPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        apViewModel = AboutPageViewModel(requireActivity().application, requireActivity().resources)
 
         binding.versionNumber.text = apViewModel.versionNumber
 

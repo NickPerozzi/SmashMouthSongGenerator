@@ -4,6 +4,8 @@ import com.perozzi_package.smashmouthsonggenerator.R
 
 class DiscographyRepository {
 
+    // Eventually, pull artist data from somewhere
+
     val smashMouthDiscography: MutableMap<String, Map<String, Any>> = mutableMapOf(
         "fush_yu_mang" to mapOf(
             "name" to "Fush Yu Mang",

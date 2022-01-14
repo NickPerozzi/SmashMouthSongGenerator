@@ -14,7 +14,7 @@ class someBODY: Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@someBODY)
-            modules(listOf(appModule))
+            modules(modulesForDependencyInjection)
         }
     }
 }
