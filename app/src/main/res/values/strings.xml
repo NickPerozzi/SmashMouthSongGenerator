@@ -23,6 +23,7 @@
     <string name="you_need_some_weight">Please give at least one album a weight</string>
     <string name="your_lyrics_are_ready">Your lyrics are ready for you in the \"Lyrics\" tab</string>
     <string name="you_need_to_generate_lyrics">Bruh you have to generate a song first</string>
+    <string name="there_are_no_lyrics">These lyrics cannot be saved as they do not exist</string>
     <string name="cancel">Nope!</string>
     <string name="save_it">Save it!</string>
     <string name="song_saved">Song saved!</string>

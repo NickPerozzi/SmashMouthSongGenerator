@@ -14,20 +14,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class SavedSongsViewModel(application: Application) : AndroidViewModel(application) {
+class SavedSongsViewModel(private val app: Application) : AndroidViewModel(app) {
 
     val readAllData: LiveData<List<SavedSong>>
     private val repository: SavedSongRepository
 
     init {
-        val savedSongDao = SavedSongDatabase.getDatabase(application).savedSongDao()
+        val savedSongDao = SavedSongDatabase.getDatabase(app).savedSongDao()
         repository = SavedSongRepository(savedSongDao)
         readAllData = repository.readAllData
     }
-
-    private var savedSongsGridLayoutManager: GridLayoutManager? = GridLayoutManager(
-        application, 1, LinearLayoutManager.VERTICAL, false
-    )
 
     var savedSongsGoHereTextVisibility: MutableLiveData<Int> = readAllData.map{
         if (readAllData.value?.size == 0) {
@@ -47,7 +43,9 @@ class SavedSongsViewModel(application: Application) : AndroidViewModel(applicati
         thisInterface: SavedSongAdapter.OnClickDeleteInterface,
         recyclerView: RecyclerView
     ) {
-        recyclerView.layoutManager = savedSongsGridLayoutManager
+        recyclerView.layoutManager = GridLayoutManager(
+            app, 1, LinearLayoutManager.VERTICAL, false
+        )
         recyclerView.setHasFixedSize(true)
         val adapter = SavedSongAdapter(thisInterface)
         recyclerView.adapter = adapter

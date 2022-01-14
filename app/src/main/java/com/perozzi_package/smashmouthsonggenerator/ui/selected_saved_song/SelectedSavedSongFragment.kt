@@ -16,12 +16,14 @@ import androidx.navigation.fragment.navArgs
 import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentSelectedSavedSongBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SelectedSavedSongFragment : Fragment() {
 
+    private val sssViewModel: SelectedSavedSongViewModel by viewModel()
     private val args: SelectedSavedSongFragmentArgs by navArgs()
+
     private lateinit var binding: FragmentSelectedSavedSongBinding
-    private lateinit var sssViewModel: SelectedSavedSongViewModel
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -37,7 +39,6 @@ class SelectedSavedSongFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        sssViewModel = SelectedSavedSongViewModel(requireActivity().application)
 
         val titleEditText = binding.selectedSongTitle
         val lyricsEditText = binding.selectedSongLyrics

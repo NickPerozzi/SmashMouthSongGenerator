@@ -21,10 +21,12 @@ import com.perozzi_package.smashmouthsonggenerator.R
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentLyricDisplayBinding
 import kotlinx.coroutines.flow.first
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LyricDisplayFragment : Fragment() {
 
-    private lateinit var ldViewModel: LyricDisplayViewModel
+    private val ldViewModel: LyricDisplayViewModel by viewModel()
+
     private lateinit var navController: NavController
     private lateinit var binding: FragmentLyricDisplayBinding
     private lateinit var dataStore: DataStore<Preferences>
@@ -44,7 +46,6 @@ class LyricDisplayFragment : Fragment() {
 
         dataStore = requireContext().createDataStore(name = "settings")
 
-        ldViewModel = LyricDisplayViewModel(requireActivity().application)
         navController = Navigation.findNavController(view)
 
         var latestLyrics: String?
@@ -61,13 +62,24 @@ class LyricDisplayFragment : Fragment() {
         val saveLocallyButton = binding.saveLocallyButton
         saveLocallyButton.setOnClickListener {
             songTitle = titleEditText.text.toString()
-            latestLyrics = lyricsEditText.text.toString()
             if (songTitle.isEmpty()) {
                 Toast.makeText(
                     context, resources.getString(R.string.give_your_song_a_name),
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
+            }
+            latestLyrics = lyricsEditText.text.toString()
+            latestLyrics?.let {
+                if (it.isEmpty()) {
+                    Toast.makeText(
+                        context, resources.getString(R.string.there_are_no_lyrics),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                val songToSave = SavedSong(0, songTitle, it)
+                ldViewModel.insertDataToDatabase(songToSave)
             }
             if (latestLyrics == resources.getString(R.string.lyrics_go_here)) {
                 Toast.makeText(
@@ -76,26 +88,25 @@ class LyricDisplayFragment : Fragment() {
                 ).show()
                 return@setOnClickListener
             }
-            val songToSave = SavedSong(0, songTitle, latestLyrics!!)
-            insertDataToDatabase(songToSave)
+
             val action = LyricDisplayFragmentDirections
                 .actionLyricDisplayFragmentToSavedSongsFragment()
             navController.navigate(action)
         }
+
         binding.generateAgainButton.setOnClickListener { navController.popBackStack() }
+
         binding.copyLyrics.setOnClickListener {
             songTitle = titleEditText.text.toString()
             latestLyrics = lyricsEditText.text.toString()
             latestLyrics?.let { copyToClipboard(requireActivity(), songTitle, it) }
         }
-    }
 
-    private fun insertDataToDatabase(songToSave: SavedSong) {
-        ldViewModel.addSavedSong(songToSave)
-        Toast.makeText(
-            requireContext(), resources.getString(R.string.song_saved),
-            Toast.LENGTH_SHORT
-        ).show()
+        ldViewModel.addToDatabaseStatus.observe(viewLifecycleOwner, {
+            if (it) { Toast.makeText(requireContext(), resources.getString(R.string.song_saved), Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
     private fun copyToClipboard(fragActivity: FragmentActivity, title: String, lyrics: String) {
@@ -107,7 +118,6 @@ class LyricDisplayFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
-
 
     private suspend fun read(key: String): String? {
         val dataStoreKey = preferencesKey<String>(key)

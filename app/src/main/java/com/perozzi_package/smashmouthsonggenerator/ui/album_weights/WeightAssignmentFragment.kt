@@ -33,7 +33,6 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.weightAssignmentViewModel = waViewModel
         waViewModel.lyricGenerationStatus.value = "Before"
 
         waViewModel.prepareDataForAdapter()
@@ -43,7 +42,9 @@ class WeightAssignmentFragment : Fragment(), AlbumGridAdapter.OnSeekBarChangeLis
 
         Glide.with(this).load(R.drawable.somebody_gif_loading).into(binding.loadingIcon)
 
+        binding.weightAssignmentViewModel = waViewModel
         binding.generateLyricsButton.setOnClickListener {
+            binding.generateLyricsButton.isEnabled = false
             if (!waViewModel.areThereAnyNonZeroWeights()) {
                 Toast.makeText(
                     context,
