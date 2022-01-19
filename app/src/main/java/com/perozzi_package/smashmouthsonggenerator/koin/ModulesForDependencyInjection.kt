@@ -1,7 +1,6 @@
 package com.perozzi_package.smashmouthsonggenerator.koin
 
 import android.content.Context
-import androidx.datastore.core.DataStore
 import com.perozzi_package.smashmouthsonggenerator.data.*
 import com.perozzi_package.smashmouthsonggenerator.ui.about_page.AboutPageViewModel
 import com.perozzi_package.smashmouthsonggenerator.ui.album_weights.WeightAssignmentViewModel
@@ -51,6 +50,15 @@ val weightAssignmentViewModelModule = module {
     viewModel { WeightAssignmentViewModel(get(), get(), get(), get()) }
 }
 
+/*
+val dataStoreModule = module {
+    fun provideDataStore(): DataStore<Preferences> {
+        return DataStore<Preferences>
+    }
+    single { DataStore }
+}
+*/
+
 val lyricDisplayViewModelModule = module {
     viewModel { LyricDisplayViewModel(get(), get()) }
 }
@@ -66,13 +74,6 @@ val selectedSavedSongViewModelModule = module {
 val aboutPageViewModelModule = module {
     viewModel { AboutPageViewModel(get(), get())}
 }
-
-
-/*
-val dataStoreModule = module {
-    single { DataStore }
-}
-*/
 
 val modulesForDependencyInjection = listOf(
     appModule,
