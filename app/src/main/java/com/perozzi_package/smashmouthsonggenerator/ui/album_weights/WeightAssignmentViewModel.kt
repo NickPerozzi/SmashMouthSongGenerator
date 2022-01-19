@@ -52,9 +52,9 @@ class WeightAssignmentViewModel(
         val imageAddressList = mutableListOf<Int>()
         val albumWeightsMapValues = ArrayList(albumWeightsMap.values)
         for (album in artistDiscography.keys) {
-            yearsList.add(artistDiscography[album]!!["year"] as String)
-            titlesList.add(artistDiscography[album]!!["name"] as String)
-            imageAddressList.add(artistDiscography[album]!!["imageAddress"] as Int)
+            yearsList.add(artistDiscography[album]?.get("year") as String)
+            titlesList.add(artistDiscography[album]?.get("name") as String)
+            imageAddressList.add(artistDiscography[album]?.get("imageAddress") as Int)
         }
         for (index in 0 until yearsList.size) {
             arrayForAlbumGrid.add(
@@ -69,7 +69,7 @@ class WeightAssignmentViewModel(
         return arrayForAlbumGrid
     }
 
-    private fun createAlbumWeightsMap(): MutableMap<String,Int> {
+    private fun createAlbumWeightsMap(): MutableMap<String, Int> {
         val artistDiscography = discographyRepository.smashMouthDiscography
         val tempKeys: MutableList<String> = mutableListOf()
         val tempValues: MutableList<Int> = mutableListOf()
@@ -80,7 +80,7 @@ class WeightAssignmentViewModel(
         return tempKeys.zip(tempValues).toMap().toMutableMap()
     }
 
-    val albumWeightsMap: MutableMap<String,Int> = createAlbumWeightsMap()
+    val albumWeightsMap: MutableMap<String, Int> = createAlbumWeightsMap()
 
     fun prepareAlbumRecyclerView(
         thisInterface: AlbumGridAdapter.OnSeekBarChangeListenerInterface,

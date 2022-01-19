@@ -1,21 +1,19 @@
 package com.perozzi_package.smashmouthsonggenerator.ui.selected_saved_song
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.perozzi_package.smashmouthsonggenerator.R
+import com.perozzi_package.smashmouthsonggenerator.copyToClipboard
 import com.perozzi_package.smashmouthsonggenerator.data.SavedSong
 import com.perozzi_package.smashmouthsonggenerator.databinding.FragmentSelectedSavedSongBinding
+import com.perozzi_package.smashmouthsonggenerator.hideKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SelectedSavedSongFragment : Fragment() {
@@ -71,9 +69,13 @@ class SelectedSavedSongFragment : Fragment() {
                 ).show()
                 return@setOnClickListener
             }
+            hideKeyboard(requireActivity(), view)
             updateDataInDatabase(args.savedItemObject)
             navController.popBackStack()
         }
+
+        binding.cancelButton.setOnClickListener {
+            cancelChanges(args.savedItemObject) }
     }
 
     private fun updateDataInDatabase(savedSong: SavedSong) {
@@ -84,13 +86,26 @@ class SelectedSavedSongFragment : Fragment() {
         ).show()
     }
 
-    private fun copyToClipboard(fragActivity: FragmentActivity, title: String, lyrics: String) {
-        val clipboard = fragActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText(title, lyrics)
-        clipboard.setPrimaryClip(clip)
-        Toast.makeText(
-            context, resources.getString(R.string.copied_to_clipboard),
-            Toast.LENGTH_SHORT
-        ).show()
+    private fun cancelChanges(savedSong: SavedSong) {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yeah") { _, _ ->
+            Toast.makeText(
+                requireContext(),
+                "No changes made to \"${savedSong.songTitle}\"",
+                Toast.LENGTH_SHORT
+            ).show()
+            navController.popBackStack()
+        }
+        builder.setNegativeButton("Well hold on") { _, _ ->
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.heck_yeah),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        builder.setTitle(getString(R.string.cancel_changes_prompt,savedSong.songTitle))
+        builder.setMessage(getString(R.string.you_sure_you_want_to_cancel))
+        builder.create().show()
     }
+
 }

@@ -40,7 +40,7 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
 
     }
 
-    private fun deleteUser(savedSong: SavedSong) {
+    override fun onClickDelete(savedSong: SavedSong) {
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yeah") { _, _ ->
             ssViewModel.deleteSavedSong(savedSong)
@@ -57,13 +57,8 @@ class SavedSongsFragment : Fragment(), SavedSongAdapter.OnClickDeleteInterface {
                 Toast.LENGTH_SHORT
             ).show()
         }
-        builder.setTitle(getString(R.string.delete_song_prompt,savedSong.songTitle))
+        builder.setTitle(getString(R.string.delete_song_prompt, savedSong.songTitle))
         builder.setMessage(getString(R.string.you_sure_you_want_to_delete))
         builder.create().show()
     }
-
-    override fun onClickDelete(savedSong: SavedSong) {
-        deleteUser(savedSong)
-    }
-
 }
