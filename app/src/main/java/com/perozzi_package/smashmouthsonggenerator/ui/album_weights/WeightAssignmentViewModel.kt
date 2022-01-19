@@ -52,9 +52,9 @@ class WeightAssignmentViewModel(
         val imageAddressList = mutableListOf<Int>()
         val albumWeightsMapValues = ArrayList(albumWeightsMap.values)
         for (album in artistDiscography.keys) {
-            yearsList.add(artistDiscography[album]!!["year"] as String)
-            titlesList.add(artistDiscography[album]!!["name"] as String)
-            imageAddressList.add(artistDiscography[album]!!["imageAddress"] as Int)
+            yearsList.add(artistDiscography[album]?.get("year") as String)
+            titlesList.add(artistDiscography[album]?.get("name") as String)
+            imageAddressList.add(artistDiscography[album]?.get("imageAddress") as Int)
         }
         for (index in 0 until yearsList.size) {
             arrayForAlbumGrid.add(
