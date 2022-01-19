@@ -102,7 +102,7 @@ class LyricDisplayFragment : Fragment() {
             latestLyrics?.let { copyToClipboard(requireActivity(), songTitle, it) }
         }
 
-        ldViewModel.addToDatabaseStatus.observe(viewLifecycleOwner, {
+        ldViewModel.savedToDatabaseIndicator.observe(viewLifecycleOwner, {
             if (it) { Toast.makeText(requireContext(), resources.getString(R.string.song_saved), Toast.LENGTH_SHORT).show()
             }
         })
