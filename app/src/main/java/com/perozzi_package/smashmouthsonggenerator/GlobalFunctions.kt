@@ -9,8 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 
-// This file is for functions used in more than one place (intended to reduce duplicate code)
-
 fun hideKeyboard(activity: Activity, view: View?) {
     if (activity.currentFocus == null) { return }
     val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -6,7 +6,6 @@ import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.createDataStore
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,27 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.perozzi_package.smashmouthsonggenerator.adapters.AlbumGridAdapter
 import com.perozzi_package.smashmouthsonggenerator.data.DiscographyRepository
 import com.perozzi_package.smashmouthsonggenerator.data.GeneratedLyricsRepository
-import com.perozzi_package.smashmouthsonggenerator.koin.ImportantClass
 import kotlinx.coroutines.launch
 import java.util.*
 
 class WeightAssignmentViewModel(
-    application: Application,
-    importantClass: ImportantClass,
     private val discographyRepository: DiscographyRepository,
-    private val generatedLyricsRepository: GeneratedLyricsRepository
-) :
-    ViewModel() {
+    private val generatedLyricsRepository: GeneratedLyricsRepository,
+    private val dataStore: DataStore<Preferences>
+): ViewModel() {
 
     var lyricGenerationStatus: MutableLiveData<String> = MutableLiveData("Before")
-
-    // Learning Dependency Injection, this doesn't have any practical use
-    init {
-        importantClass.createImportantString()
-    }
-
-    private val dataStore: DataStore<Preferences> = application.createDataStore(name = "settings")
-
 
     var loadingIconVisibility: MutableLiveData<Int> = lyricGenerationStatus.map {
         if (it == "During") {

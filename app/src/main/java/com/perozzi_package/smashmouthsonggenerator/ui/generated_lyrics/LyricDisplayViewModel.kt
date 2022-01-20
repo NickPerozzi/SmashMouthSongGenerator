@@ -15,8 +15,7 @@ import kotlinx.coroutines.launch
 class LyricDisplayViewModel(
     application: Application,
     private val repository: SavedSongRepository
-) :
-    AndroidViewModel(application) {
+): AndroidViewModel(application) {
 
     val savedToDatabaseIndicator: MutableLiveData<Boolean> = MutableLiveData(false)
 

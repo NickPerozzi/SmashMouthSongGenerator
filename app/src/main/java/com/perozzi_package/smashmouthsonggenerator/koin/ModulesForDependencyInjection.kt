@@ -1,6 +1,10 @@
 package com.perozzi_package.smashmouthsonggenerator.koin
 
+import android.app.Application
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
 import com.perozzi_package.smashmouthsonggenerator.data.*
 import com.perozzi_package.smashmouthsonggenerator.ui.about_page.AboutPageViewModel
 import com.perozzi_package.smashmouthsonggenerator.ui.album_weights.WeightAssignmentViewModel
@@ -16,9 +20,6 @@ val appModule = module {
     // same Application object every time
     single { androidApplication().applicationContext }
 
-    // new ImportantClass object every time
-    factory { ImportantClass() }
-
     single { DiscographyRepository() }
 
     single { GeneratedLyricsRepository() }
@@ -27,7 +28,7 @@ val appModule = module {
 
 }
 
-val savedSongDatabaseModule = module{
+val savedSongDatabaseModule = module {
     fun provideSavedSongDatabase(context: Context): SavedSongDatabase {
         return SavedSongDatabase.getDatabase(context)
     }
@@ -39,7 +40,7 @@ val savedSongDatabaseModule = module{
     single { provideSavedSongDao(get()) }
 }
 
-val savedSongRepositoryModule = module{
+val savedSongRepositoryModule = module {
     fun provideSavedSongRepository(savedSongDao: SavedSongDao): SavedSongRepository {
         return SavedSongRepository(savedSongDao)
     }
@@ -47,17 +48,16 @@ val savedSongRepositoryModule = module{
 }
 
 val weightAssignmentViewModelModule = module {
-    viewModel { WeightAssignmentViewModel(get(), get(), get(), get()) }
+    viewModel { WeightAssignmentViewModel(get(), get(), get()) }
 }
 
-/*
 val dataStoreModule = module {
-    fun provideDataStore(): DataStore<Preferences> {
-        return DataStore<Preferences>
+    fun provideDataStore(application: Application): DataStore<Preferences> {
+        return application.createDataStore(name = "settings")
     }
-    single { DataStore }
+    single { provideDataStore(get()) }
 }
-*/
+
 
 val lyricDisplayViewModelModule = module {
     viewModel { LyricDisplayViewModel(get(), get()) }
@@ -80,6 +80,7 @@ val modulesForDependencyInjection = listOf(
     savedSongDatabaseModule,
     savedSongRepositoryModule,
     weightAssignmentViewModelModule,
+    dataStoreModule,
     lyricDisplayViewModelModule,
     savedSongsViewModelModule,
     selectedSavedSongViewModelModule,
